@@ -30,10 +30,14 @@ export default function RootLayout({
     { name: "Gallery", path: "/gallery" },
     { name: "Service", path: "/service" },
     { name: "Blog", path: "/blog" },
+    { name: "Reservation", path: "/reservation" },
   ];
 
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={` ${inter.variable} bg-emerald-950`}>
+      <head>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+      </head>
       <body className="min-h-screen font-sans">
         {/* Global Components */}
         <OfferPopup />

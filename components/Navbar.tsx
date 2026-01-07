@@ -1,105 +1,62 @@
 "use client";
 
-import  { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 
-type NavItem = {
-  name: string;
-  path: string;
-};
+type NavItem = { name: string; path: string };
+type NavbarProps = { navItems: NavItem[] };
 
-type NavbarProps = {
-  navItems: NavItem[];
-};
-
-/* =======================
-   Framer Motion Variants
-======================= */
-
+/* ------------------- Motion Variants ------------------- */
 const navVariants: Variants = {
   hidden: { opacity: 0, y: -40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
 };
 
 const itemVariants: Variants = {
   initial: { scale: 1 },
-  hover: {
-    scale: 1.1,
-    transition: {
-      type: "spring",
-      stiffness: 300,
-    },
-  },
+  hover: { scale: 1.1, transition: { type: "spring", stiffness: 300 } },
 };
 
 const underlineVariants: Variants = {
   initial: { scaleX: 0 },
-  hover: {
-    scaleX: 1,
-    transition: { duration: 0.3 },
-  },
+  hover: { scaleX: 1, transition: { duration: 0.3 } },
 };
 
 const menuVariants: Variants = {
   hidden: { opacity: 0, y: -20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.3 },
-  },
-  exit: {
-    opacity: 0,
-    y: -20,
-    transition: { duration: 0.2 },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+  exit: { opacity: 0, y: -20, transition: { duration: 0.2 } },
 };
 
-/* =======================
-   Navbar Component
-======================= */
-
+/* ------------------- Navbar ------------------- */
 export default function Navbar({ navItems }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLUListElement | null>(null);
   const pathname = usePathname();
 
-  /* Close on ESC key */
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) =>
-      e.key === "Escape" && setIsMenuOpen(false);
+    const handleEscape = (e: KeyboardEvent) => e.key === "Escape" && setIsMenuOpen(false);
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
 
-  /* Close when clicking outside */
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setIsMenuOpen(false);
       }
     };
-
-    if (isMenuOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
+    if (isMenuOpen) document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMenuOpen]);
 
   return (
     <motion.nav
-      className="w-full z-50 bg-transparent"
+      className="fixed top-0 left-0 w-full z-50"
       variants={navVariants}
       initial="hidden"
       animate="visible"
@@ -109,17 +66,10 @@ export default function Navbar({ navItems }: NavbarProps) {
       <div className="flex justify-between items-center h-16 px-4 sm:px-6">
         {/* Logo */}
         <Link href="/" aria-label="Home">
-          <Image
-            src="/logo.png"
-            alt="Poovar Boating Logo"
-            width={120}
-            height={40}
-            priority
-            className="h-8 sm:h-10 w-auto drop-shadow-lg"
-          />
+          <Image src="/logo.png" alt="Poovar Boating Logo" width={120} height={40} className="h-8 sm:h-10 w-auto drop-shadow-lg" priority />
         </Link>
 
-        {/* Mobile Toggle */}
+        {/* Mobile Menu Toggle */}
         <button
           onClick={() => setIsMenuOpen((prev) => !prev)}
           className="md:hidden text-white text-2xl"
@@ -134,13 +84,7 @@ export default function Navbar({ navItems }: NavbarProps) {
           {navItems.map((item) => {
             const isActive = pathname === item.path;
             return (
-              <motion.li
-                key={item.name}
-                variants={itemVariants}
-                initial="initial"
-                whileHover="hover"
-                className="relative"
-              >
+              <motion.li key={item.name} variants={itemVariants} initial="initial" whileHover="hover" className="relative">
                 <Link
                   href={item.path}
                   className={`font-semibold px-4 py-2 rounded-full transition ${
@@ -181,13 +125,7 @@ export default function Navbar({ navItems }: NavbarProps) {
             {navItems.map((item) => {
               const isActive = pathname === item.path;
               return (
-                <motion.li
-                  key={item.name}
-                  variants={itemVariants}
-                  initial="initial"
-                  whileHover="hover"
-                  onClick={() => setIsMenuOpen(false)}
-                >
+                <motion.li key={item.name} variants={itemVariants} initial="initial" whileHover="hover" onClick={() => setIsMenuOpen(false)}>
                   <Link
                     href={item.path}
                     className={`block text-lg font-semibold px-6 py-2 rounded-full transition ${

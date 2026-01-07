@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "dotenv": "^17.2.3",
     "emailjs": "^5.0.0",
     "framer-motion": "^12.24.7",
     "next": "16.1.1",
+    "razorpay": "^2.9.6",
     "react": "19.2.3",
     "react-chatbot-kit": "^2.2.2",
     "react-dom": "19.2.3",
