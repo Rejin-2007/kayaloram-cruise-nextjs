@@ -4,9 +4,9 @@ import "./globals.css";
 
 import Navbar from "@/components/Navbar";
 import FloatingContactButtons from "@/components/FloatingContactButtons";
-import OfferPopup from "@/components/OfferPopup";
 import TawkToChat from "@/components/TawkToChat";
 import Footer from "@/components/Footer";
+import OfferPopup from "@/components/OfferPopup";
 
 const inter = Inter({
   subsets: ["latin"],
