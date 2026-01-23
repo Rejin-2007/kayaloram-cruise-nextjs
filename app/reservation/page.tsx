@@ -1,14 +1,28 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { FaPhoneAlt, FaCalendarAlt, FaShip } from "react-icons/fa";
 
-type Package = { label: string; value: string; price: number };
+type Package = { label: string; value: string };
 
 const packages: Package[] = [
-  { label: "Golden Beach Cruise", value: "golden", price: 2000 },
-  { label: "Island Boating Tour", value: "island", price: 3500 },
-  { label: "Full Day Backwater Tour", value: "backwater", price: 5000 },
+  { label: "Golden Beach Cruise", value: "golden" },
+  { label: "Island Boating Tour", value: "island" },
+  { label: "Full Day Backwater Tour", value: "backwater" },
 ];
+
+/* ---------- SEO Metadata ---------- */
+export const metadata = {
+  title: "Poovar Boating Reservation | Book Poovar Island Boating Online",
+  description:
+    "Book Poovar boating and Poovar island boating online. Choose golden beach cruise, island boating tour, or full-day Kerala backwater cruise at Kayaloram Resort Poovar.",
+  keywords:
+    "Poovar boating, Poovar island boating, Poovar boating booking, Kerala backwater cruise, golden beach cruise Poovar, Kayaloram Resort Poovar",
+  alternates: {
+    canonical: "https://www.poovarislandboating.com/reservation",
+  },
+};
 
 export default function ReservationPage() {
   const [phone, setPhone] = useState("");
@@ -16,64 +30,40 @@ export default function ReservationPage() {
   const [packageType, setPackageType] = useState(packages[0].value);
   const [loading, setLoading] = useState(false);
 
-  const handlePayment = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    const selectedPackage = packages.find((p) => p.value === packageType)!;
-
-    // Create order on server
-    const res = await fetch("/api/create-order", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        amount: selectedPackage.price,
-        phone,
-        packageType,
-        date,
-      }),
+    // 👉 For now just log / later connect API / WhatsApp
+    console.log({
+      phone,
+      date,
+      packageType,
     });
 
-    const data = await res.json();
-    if (!data.order) {
-      alert("Failed to create order");
-      setLoading(false);
-      return;
-    }
-
-    // Razorpay options
-    const options = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
-      amount: data.order.amount,
-      currency: data.order.currency,
-      name: "Kayaloram Resort Poovar",
-      description: selectedPackage.label,
-      order_id: data.order.id,
-      handler: function (response: any) {
-        alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
-      },
-      prefill: { contact: phone },
-      theme: { color: "#16a34a" },
-    };
-
-    const rzp = new (window as any).Razorpay(options);
-    rzp.open();
-
+    alert("Your Poovar boating enquiry has been submitted successfully!");
     setLoading(false);
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-emerald-950 px-4">
-      <form
-        onSubmit={handlePayment}
+      <motion.form
+        onSubmit={handleSubmit}
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
         className="bg-white/10 backdrop-blur-md border border-emerald-400/30 p-8 rounded-3xl shadow-lg w-full max-w-md text-white"
+        aria-label="Poovar boating reservation form"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center text-lime-200">
+        <h1 className="text-2xl font-bold mb-6 text-center text-lime-200">
           Book Your Poovar Boating Package
-        </h2>
+        </h1>
 
+        {/* Phone */}
         <label className="block mb-4">
-          Phone Number
+          <span className="flex items-center gap-2">
+            <FaPhoneAlt className="text-lime-300" /> Phone Number
+          </span>
           <input
             type="tel"
             required
@@ -84,8 +74,11 @@ export default function ReservationPage() {
           />
         </label>
 
+        {/* Date */}
         <label className="block mb-4">
-          Date
+          <span className="flex items-center gap-2">
+            <FaCalendarAlt className="text-lime-300" /> Date
+          </span>
           <input
             type="date"
             required
@@ -95,8 +88,11 @@ export default function ReservationPage() {
           />
         </label>
 
+        {/* Package */}
         <label className="block mb-6">
-          Select Package
+          <span className="flex items-center gap-2">
+            <FaShip className="text-lime-300" /> Select Package
+          </span>
           <select
             required
             value={packageType}
@@ -105,20 +101,22 @@ export default function ReservationPage() {
           >
             {packages.map((p) => (
               <option key={p.value} value={p.value}>
-                {p.label} - ₹{p.price}
+                {p.label}
               </option>
             ))}
           </select>
         </label>
 
-        <button
+        <motion.button
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
           type="submit"
           disabled={loading}
           className="w-full bg-green-400 hover:bg-green-500 text-green-900 font-semibold px-4 py-3 rounded-full shadow-lg transition-colors text-lg"
         >
-          {loading ? "Processing..." : "Pay & Book"}
-        </button>
-      </form>
+          {loading ? "Submitting..." : "Send Booking Request"}
+        </motion.button>
+      </motion.form>
     </div>
   );
 }

@@ -13,39 +13,44 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="w-full px-3 py-10 bg-emerald-950 border-t border-green-400/10 shadow-inner"
-      aria-label="Poovar Boating and Poovar Island Boating Footer and Contact Details"
+      className="w-full px-4 py-12 bg-emerald-950 border-t border-green-400/10 shadow-inner"
+      aria-label="Poovar Boating and Poovar Island Boating Footer"
     >
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-10 mt-2">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Logo */}
-        <div className="flex flex-col items-center md:items-start w-full md:w-1/3 gap-2">
+        <div className="flex flex-col items-center md:items-start gap-3">
           <Image
             src="/logo.png"
-            alt="Kayaloram Resort Logo - Poovar Boating"
+            alt="Kayaloram Resort – Poovar Boating and Poovar Island Boating"
             width={220}
             height={80}
             priority
             className="drop-shadow"
           />
+          <p className="text-sm text-lime-200 max-w-xs text-center md:text-left">
+            Trusted Poovar boating & Poovar island boating experiences since 1999.
+            Explore Kerala backwaters, mangroves, and golden beach tours.
+          </p>
         </div>
 
         {/* Contact Info */}
-        <div className="w-full md:w-1/3 flex flex-col gap-6 items-center md:items-start">
+        <div className="flex flex-col gap-6 items-center md:items-start">
           <div>
-            <div className="flex items-center gap-2 font-bold text-lime-300">
+            <div className="flex items-center gap-2 font-semibold text-lime-300">
               <SiGmail />
               <span>Email</span>
             </div>
             <a
               href="mailto:rajeshkayaloram@gmail.com"
-              className="text-lime-100 underline hover:text-lime-200"
+              className="text-lime-100 underline hover:text-lime-200 break-all"
+              aria-label="Email Kayaloram Resort"
             >
               rajeshkayaloram@gmail.com
             </a>
           </div>
 
           <div>
-            <div className="flex items-center gap-2 font-bold text-lime-300">
+            <div className="flex items-center gap-2 font-semibold text-lime-300">
               <SlLocationPin />
               <span>Location</span>
             </div>
@@ -58,18 +63,25 @@ export default function Footer() {
         </div>
 
         {/* Phone */}
-        <div className="w-full md:w-1/3 flex flex-col gap-6 items-center md:items-start">
+        <div className="flex flex-col gap-6 items-center md:items-start">
           <div>
-            <div className="flex items-center gap-2 font-bold text-lime-300">
+            <div className="flex items-center gap-2 font-semibold text-lime-300">
               <HiPhone />
               <span>Phone</span>
             </div>
-
             <div className="text-lime-100 text-sm space-y-2">
-              <a href="tel:+918139031924" className="underline block">
+              <a
+                href="tel:+918139031924"
+                className="underline block"
+                aria-label="Call Poovar Boating at 8139031924"
+              >
                 +91 81390 31924
               </a>
-              <a href="tel:+918075413797" className="underline block">
+              <a
+                href="tel:+918075413797"
+                className="underline block"
+                aria-label="Call Poovar Boating at 8075413797"
+              >
                 +91 80754 13797
               </a>
             </div>
@@ -77,14 +89,17 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Social */}
-      <div className="flex justify-center gap-8 mt-10">
+      {/* Social Media */}
+      <nav
+        className="flex justify-center gap-8 mt-12"
+        aria-label="Poovar Boating Social Media Links"
+      >
         <a
           href="https://www.instagram.com/poovar.boating"
           target="_blank"
           rel="noopener noreferrer"
           className={socialButtonClasses}
-          aria-label="Instagram"
+          aria-label="Poovar Boating Instagram"
         >
           <FaInstagram className="text-lime-400 text-2xl" />
         </a>
@@ -94,7 +109,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
           className={socialButtonClasses}
-          aria-label="YouTube"
+          aria-label="Poovar Boating YouTube"
         >
           <FaYoutube className="text-red-400 text-2xl" />
         </a>
@@ -104,14 +119,14 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
           className={socialButtonClasses}
-          aria-label="Facebook"
+          aria-label="Poovar Boating Facebook"
         >
           <FaFacebook className="text-blue-500 text-2xl" />
         </a>
-      </div>
+      </nav>
 
       {/* Copyright */}
-      <div className="text-center text-xs mt-10 text-lime-100 opacity-80">
+      <div className="text-center text-xs mt-10 text-lime-100/80">
         © {new Date().getFullYear()} Kayaloram Resort · Poovar Boating · All rights reserved
       </div>
     </footer>

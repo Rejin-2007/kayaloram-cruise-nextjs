@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import emailjs from '@emailjs/browser'
 import { motion, AnimatePresence } from 'framer-motion'
+import { FaPhoneAlt, FaEnvelopeOpenText } from 'react-icons/fa'
 
 export default function Enquiry() {
   const [activeTab, setActiveTab] = useState<'message' | 'call'>('message')
@@ -33,26 +34,37 @@ export default function Enquiry() {
         'M40cSVMnA_AywFy2-'
       )
       .then(() => {
-        setStatus('✅ Enquiry sent successfully!')
+        setStatus('✅ Your Poovar boating enquiry has been sent successfully!')
         setFormData({ name: '', phone: '', message: '' })
         setSending(false)
       })
       .catch((error) => {
         console.error(error)
-        setStatus('❌ Failed to send enquiry. Try again.')
+        setStatus('❌ Failed to send enquiry. Please try again.')
         setSending(false)
       })
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-emerald-950 p-6">
+    <main
+      className="min-h-screen flex items-center justify-center bg-emerald-950 p-6"
+      aria-label="Poovar boating enquiry and Kerala backwater tour booking section"
+    >
       <section className="max-w-lg w-full bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl p-6 text-center">
-        <h1 className="text-3xl font-extrabold text-white mb-6">
-          Enquire About Poovar Boating & Kerala Backwater Tours
+        <h1 className="text-3xl font-extrabold text-white mb-3">
+          Enquire About Poovar Boating & Kerala Backwater Cruises
         </h1>
 
+        <p className="text-sm text-emerald-100 mb-6">
+          Contact us for Poovar boating prices, packages, timings, and backwater
+          cruise bookings near Trivandrum.
+        </p>
+
         {/* Tabs */}
-        <nav className="flex justify-center gap-4 mb-6">
+        <nav
+          className="flex justify-center gap-4 mb-6"
+          aria-label="Choose enquiry method for Poovar boating"
+        >
           {['message', 'call'].map((tab) => (
             <motion.button
               key={tab}
@@ -64,8 +76,17 @@ export default function Enquiry() {
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
+              aria-pressed={activeTab === tab}
             >
-              {tab === 'message' ? 'Message' : 'Call Us'}
+              {tab === 'message' ? (
+                <span className="flex items-center gap-2">
+                  <FaEnvelopeOpenText aria-hidden="true" /> Message
+                </span>
+              ) : (
+                <span className="flex items-center gap-2">
+                  <FaPhoneAlt aria-hidden="true" /> Call Us
+                </span>
+              )}
             </motion.button>
           ))}
         </nav>
@@ -79,13 +100,15 @@ export default function Enquiry() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
+              aria-label="Poovar boating enquiry form"
             >
               <input
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="Name"
+                placeholder="Your Name"
                 required
+                aria-label="Your name for Poovar boating enquiry"
                 className="w-full p-2 rounded bg-white/10 text-white"
               />
 
@@ -93,8 +116,9 @@ export default function Enquiry() {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                placeholder="Phone"
+                placeholder="Phone Number"
                 required
+                aria-label="Phone number for Poovar boating contact"
                 className="w-full p-2 rounded bg-white/10 text-white"
               />
 
@@ -102,8 +126,9 @@ export default function Enquiry() {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="Message"
+                placeholder="Message (Poovar boating package, date, or questions)"
                 required
+                aria-label="Message regarding Poovar boating or backwater cruise"
                 className="w-full p-2 rounded bg-white/10 text-white"
               />
 
@@ -111,8 +136,10 @@ export default function Enquiry() {
                 type="submit"
                 disabled={sending}
                 className="w-full bg-emerald-600 text-white py-2 rounded"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                {sending ? 'Sending...' : 'Submit Enquiry'}
+                {sending ? 'Sending Enquiry...' : 'Submit Poovar Boating Enquiry'}
               </motion.button>
 
               {status && (
@@ -134,12 +161,14 @@ export default function Enquiry() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              aria-label="Call for Poovar boating booking"
             >
               <a
                 href="tel:+918139031924"
-                className="inline-block bg-emerald-600 px-6 py-3 rounded-lg"
+                className="inline-flex items-center gap-2 bg-emerald-600 px-6 py-3 rounded-lg"
               >
-                📞 Call +91 81390 31924
+                <FaPhoneAlt aria-hidden="true" />
+                Call +91 81390 31924
               </a>
             </motion.div>
           )}

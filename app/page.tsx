@@ -5,6 +5,7 @@ import HomeEntry from "@/components/HomeEntry";
 import ExplorationViews from "@/components/ExplorationViews";
 import GlassCardGrid from "./service/page";
 import FAQ from "@/components/FAQ";
+import ChatBotUI from "../chatbot/ChatBotUI";
 
 /* ---------- SEO Metadata ---------- */
 export const metadata = {
@@ -21,7 +22,7 @@ export const metadata = {
 /* ---------- Home Page Component ---------- */
 export default function HomePage() {
   return (
-    <main>
+    <main className="relative">
       <HomeEntry />
       <AboutInformation />
       <ExplorationViews />
@@ -29,6 +30,11 @@ export default function HomePage() {
       <FAQ />
       <Reviews />
       <Enquiry />
+
+      {/* Floating Chatbot */}
+      <div className="fixed bottom-4 right-4 z-50">
+        <ChatBotUI />
+      </div>
     </main>
   );
 }

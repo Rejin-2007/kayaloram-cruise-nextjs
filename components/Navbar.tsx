@@ -13,7 +13,11 @@ type NavbarProps = { navItems: NavItem[] };
 /* ------------------- Motion Variants ------------------- */
 const navVariants: Variants = {
   hidden: { opacity: 0, y: -40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
 const itemVariants: Variants = {
@@ -39,7 +43,8 @@ export default function Navbar({ navItems }: NavbarProps) {
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => e.key === "Escape" && setIsMenuOpen(false);
+    const handleEscape = (e: KeyboardEvent) =>
+      e.key === "Escape" && setIsMenuOpen(false);
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
@@ -61,19 +66,33 @@ export default function Navbar({ navItems }: NavbarProps) {
       initial="hidden"
       animate="visible"
       role="navigation"
-      aria-label="Main Navigation"
+      aria-label="Main navigation for Poovar boating, Poovar island boating and Kayaloram Cruise pages"
     >
       <div className="flex justify-between items-center h-16 px-4 sm:px-6">
         {/* Logo */}
-        <Link href="/" aria-label="Home">
-          <Image src="/logo.png" alt="Poovar Boating Logo" width={120} height={40} className="h-8 sm:h-10 w-auto drop-shadow-lg" priority />
+        <Link
+          href="/"
+          aria-label="Poovar boating and Poovar island boating home page"
+        >
+          <Image
+            src="/logo.png"
+            alt="Kayaloram Cruise logo – Poovar boating and Poovar island boating"
+            width={120}
+            height={40}
+            className="h-8 sm:h-10 w-auto drop-shadow-lg"
+            priority
+          />
         </Link>
 
         {/* Mobile Menu Toggle */}
         <button
           onClick={() => setIsMenuOpen((prev) => !prev)}
           className="md:hidden text-white text-2xl"
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-label={
+            isMenuOpen
+              ? "Close Poovar boating navigation menu"
+              : "Open Poovar boating navigation menu"
+          }
           aria-expanded={isMenuOpen}
         >
           {isMenuOpen ? <FaTimes /> : <FaBars />}
@@ -84,9 +103,16 @@ export default function Navbar({ navItems }: NavbarProps) {
           {navItems.map((item) => {
             const isActive = pathname === item.path;
             return (
-              <motion.li key={item.name} variants={itemVariants} initial="initial" whileHover="hover" className="relative">
+              <motion.li
+                key={item.name}
+                variants={itemVariants}
+                initial="initial"
+                whileHover="hover"
+                className="relative"
+              >
                 <Link
                   href={item.path}
+                  aria-label={`Navigate to ${item.name} – Poovar boating information`}
                   className={`font-semibold px-4 py-2 rounded-full transition ${
                     isActive
                       ? "bg-green-300/80 text-green-900 shadow-md"
@@ -121,19 +147,27 @@ export default function Navbar({ navItems }: NavbarProps) {
             animate="visible"
             exit="exit"
             role="menu"
+            aria-label="Mobile navigation menu for Poovar boating pages"
           >
             {navItems.map((item) => {
               const isActive = pathname === item.path;
               return (
-                <motion.li key={item.name} variants={itemVariants} initial="initial" whileHover="hover" onClick={() => setIsMenuOpen(false)}>
+                <motion.li
+                  key={item.name}
+                  variants={itemVariants}
+                  initial="initial"
+                  whileHover="hover"
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   <Link
                     href={item.path}
+                    role="menuitem"
+                    aria-label={`Open ${item.name} page related to Poovar boating`}
                     className={`block text-lg font-semibold px-6 py-2 rounded-full transition ${
                       isActive
                         ? "bg-green-300/80 text-green-900 shadow-md"
                         : "text-white hover:bg-green-200/40 hover:text-green-900"
                     }`}
-                    role="menuitem"
                   >
                     {item.name}
                   </Link>

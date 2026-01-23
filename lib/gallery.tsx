@@ -1,16 +1,20 @@
 import fs from "fs";
 import path from "path";
+import "server-only";
 
 /**
  * Get all image filenames from /public/gallery
+ * Server-side only (App Router safe)
  */
 export function getGalleryImages(): string[] {
   const galleryDir = path.join(process.cwd(), "public/gallery");
+
   if (!fs.existsSync(galleryDir)) return [];
 
   return fs
     .readdirSync(galleryDir)
-    .filter((file) => /\.(jpg|jpeg|png|webp|gif)$/i.test(file));
+    .filter((file) => /\.(jpg|jpeg|png|webp|gif)$/i.test(file))
+    .sort(); // stable order for SEO & hydration safety
 }
 
 /**

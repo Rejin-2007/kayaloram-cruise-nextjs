@@ -6,10 +6,19 @@ class MessageParser {
   }
 
   parse(message: string) {
-    const lower = message.toLowerCase();
+    if (!message) return;
 
-    if (lower.includes("booking")) {
+    const lower = message.toLowerCase().trim();
+
+    if (
+      lower.includes("book") ||
+      lower.includes("booking") ||
+      lower.includes("price") ||
+      lower.includes("contact") ||
+      lower.includes("whatsapp")
+    ) {
       this.actionProvider.handleBooking();
+      return;
     }
   }
 }

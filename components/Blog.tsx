@@ -2,13 +2,15 @@
 
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa";
+import { FaSailboat } from "react-icons/fa6";
 
 const blogJsonLd = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: "Poovar Boating Services: Complete Guide to Kerala Backwaters",
   description:
-    "Poovar Island Boating, Poovar boating price, Poovar backwater cruise, and activities in Poovar Island, Kerala.",
+    "Complete guide to Poovar boating, Poovar island boating, Poovar backwater cruise, boating prices, packages, and eco tourism activities in Poovar, Kerala.",
   author: { "@type": "Person", name: "Pankaj" },
   datePublished: "2025-08-27",
   mainEntityOfPage: {
@@ -35,21 +37,23 @@ export default function Blog() {
       />
 
       <article
-        className="max-w-4xl mx-auto px-6 py-10 leading-relaxed mt-8 text-white bg-emerald-950 "
+        className="max-w-4xl mx-auto px-6 py-10 leading-relaxed mt-8 text-white bg-emerald-950"
         itemScope
         itemType="https://schema.org/BlogPosting"
+        aria-label="Poovar Boating and Poovar Island Boating Blog Guide"
       >
         <h1 className="text-3xl font-extrabold mb-2" itemProp="headline">
           Poovar Boating & Poovar Island Boating Services: Complete Guide to Kerala Backwaters
         </h1>
 
         <motion.p
-          className="text-sm text-gray-400 mb-6"
+          className="text-sm text-gray-400 mb-6 flex items-center gap-2"
           initial="hidden"
           animate="visible"
           variants={fadeInUp}
           transition={{ duration: 1 }}
         >
+          <FaSailboat className="text-emerald-400" aria-hidden="true" />
           Leave a Comment / Uncategorized / By{" "}
           <span itemProp="author">Pankaj</span>
         </motion.p>
@@ -62,8 +66,26 @@ export default function Blog() {
         >
           <p className="mb-4">
             <strong>Poovar boating</strong> and{" "}
-            <strong>Poovar island boating</strong> offer unforgettable journeys
-            through Kerala’s scenic backwaters, mangroves, and golden beaches.
+            <strong>Poovar island boating</strong> are among the most popular
+            backwater tourism experiences in Kerala. Located near Trivandrum,
+            Poovar offers serene boat rides through calm backwaters, dense
+            mangrove forests, and the iconic golden beach where river meets sea.
+          </p>
+
+          <p className="mb-4">
+            A <strong>Poovar backwater cruise</strong> typically includes scenic
+            island views, estuary boating, bird watching, and guided narration
+            by experienced local operators. Travelers frequently look for
+            details such as <strong>Poovar boating price</strong>, available
+            packages, boating timings, and the best season to visit Poovar.
+          </p>
+
+          <p className="mb-4">
+            From short island rides to extended Kerala backwater cruises, Poovar
+            island boating is known for its safety standards, affordable pricing,
+            and eco-friendly practices. These sustainable boating experiences
+            make Poovar an ideal destination for families, couples, and nature
+            enthusiasts seeking a peaceful escape.
           </p>
         </motion.section>
 
@@ -75,9 +97,11 @@ export default function Blog() {
         >
           <button
             onClick={() => router.push("/")}
-            className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg shadow-md transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg shadow-md transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+            aria-label="Go back to Poovar Boating homepage"
           >
             Go to Homepage
+            <FaArrowRight aria-hidden="true" />
           </button>
         </motion.div>
       </article>

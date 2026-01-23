@@ -44,41 +44,86 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="max-w-xl mx-auto mt-8 p-6 rounded-3xl shadow-lg backdrop-blur-md bg-emerald-400/20 border border-emerald-400/30">
-      <h2 className="text-center text-2xl md:text-3xl font-semibold text-emerald-600 mb-6">
-        Poovar Boating & Poovar Island Boating FAQs
-      </h2>
-      <div className="flex flex-col gap-4">
-        {accordionData.map((item, idx) => (
-          <div
-            key={idx}
-            className={`rounded-2xl bg-white/10 border border-emerald-300/20 shadow transition-all ${
-              openIndex === idx ? "ring-2 ring-emerald-300" : ""
-            }`}
-          >
-            <button
-              className="w-full px-5 py-4 flex justify-between items-center text-left text-emerald-200 font-medium focus:outline-none"
-              onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
-              aria-expanded={openIndex === idx}
-              aria-controls={`faq-answer-${idx}`}
-            >
-              <span>{item.question}</span>
-              <span className="text-2xl text-emerald-400 font-bold ml-3 select-none">
-                {openIndex === idx ? "−" : "+"}
-              </span>
-            </button>
-            <div
-              id={`faq-answer-${idx}`}
-              className={`px-5 pb-4 text-emerald-300 text-base transition-all duration-500 ease-in-out overflow-hidden ${
-                openIndex === idx ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
-              }`}
-              aria-hidden={openIndex !== idx}
-            >
-              <p>{item.answer}</p>
-            </div>
-          </div>
-        ))}
+    <section
+      className="max-w-2xl mx-auto mt-16 px-4"
+      aria-labelledby="faq-heading"
+    >
+      {/* SEO: FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: accordionData.map((item) => ({
+              "@type": "Question",
+              name: item.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: item.answer,
+              },
+            })),
+          }),
+        }}
+      />
+
+      <div className="rounded-3xl backdrop-blur-md bg-emerald-400/20 border border-emerald-400/30 shadow-xl p-6">
+        <h2
+          id="faq-heading"
+          className="text-center text-2xl md:text-3xl font-bold text-emerald-600 mb-8"
+        >
+          Frequently Asked Questions – Poovar Boating & Poovar Island Tours
+        </h2>
+
+        <div className="flex flex-col gap-4">
+          {accordionData.map((item, idx) => {
+            const isOpen = openIndex === idx;
+
+            return (
+              <div
+                key={idx}
+                className={`rounded-2xl bg-white/10 border border-emerald-300/20 transition-all ${
+                  isOpen ? "ring-2 ring-emerald-300" : ""
+                }`}
+              >
+                <button
+                  className="w-full px-5 py-4 flex justify-between items-center text-left text-emerald-200 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 rounded-2xl"
+                  onClick={() => setOpenIndex(isOpen ? null : idx)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      setOpenIndex(isOpen ? null : idx);
+                    }
+                  }}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${idx}`}
+                >
+                  <span>{item.question}</span>
+                  <span
+                    className="text-2xl text-emerald-400 font-bold ml-3 select-none"
+                    aria-hidden="true"
+                  >
+                    {isOpen ? "−" : "+"}
+                  </span>
+                </button>
+
+                <div
+                  id={`faq-answer-${idx}`}
+                  className={`px-5 overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out ${
+                    isOpen
+                      ? "max-h-[500px] opacity-100 pb-4"
+                      : "max-h-0 opacity-0"
+                  }`}
+                  aria-hidden={!isOpen}
+                >
+                  <p className="text-emerald-300 text-base leading-relaxed">
+                    {item.answer}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

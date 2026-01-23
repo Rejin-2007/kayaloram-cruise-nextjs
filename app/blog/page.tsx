@@ -1,11 +1,12 @@
 import Blog from "@/components/Blog";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
+/* ---------- SEO Metadata ---------- */
 export const metadata: Metadata = {
   title:
     "Poovar Boating Blog | Poovar Island Boating News & Stories | Kayaloram Resort",
   description:
-    "Read stories, tips, and news about Poovar boating, Poovar island boating, and Kayaloram Resort. Discover Kerala backwater tours, golden beach cruises, and boating experiences.",
+    "Read stories, tips, and news about Poovar boating, Poovar island boating, and Kayaloram Resort. Discover Kerala backwater tours, golden beach cruises, and unforgettable boating experiences.",
   keywords: [
     "Poovar boating blog",
     "Poovar island boating",
@@ -20,10 +21,11 @@ export const metadata: Metadata = {
   },
 };
 
+/* ---------- Blog Page ---------- */
 export default function BlogPage() {
   return (
-    <div>
+    <main className="min-h-screen">
       <Blog />
-    </div>
+    </main>
   );
 }
