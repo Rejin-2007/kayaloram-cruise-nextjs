@@ -1,18 +1,18 @@
+"use client";
+
 import { createChatBotMessage } from "react-chatbot-kit";
 
-const config: any = {
-  botName: "Kayaloram Bot",
-
+const config = {
+  botName: "Staff Of Kayaloram",
   initialMessages: [
     createChatBotMessage(
-      "👋 Hi! Welcome to Kayaloram Backwater Cruises. How can I help you today?",
-      {}
+      "Hi! How can I help you today?",
+      {} // 👈 REQUIRED for TypeScript
     ),
   ],
-
   customStyles: {
     botMessageBox: {
-      backgroundColor: "#0f766e", // emerald-700
+      backgroundColor: "#0f766e",
     },
     chatButton: {
       backgroundColor: "#0f766e",

@@ -56,27 +56,25 @@ export default function Navbar({ navItems }: NavbarProps) {
       }
     };
     if (isMenuOpen) document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
   }, [isMenuOpen]);
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 w-full z-50"
+      className="fixed top-0 left-0 w-full z-50 bg-transparent"
       variants={navVariants}
       initial="hidden"
       animate="visible"
       role="navigation"
-      aria-label="Main navigation for Poovar boating, Poovar island boating and Kayaloram Cruise pages"
+      aria-label="Main navigation for Poovar boating and Kayaloram Cruise"
     >
       <div className="flex justify-between items-center h-16 px-4 sm:px-6">
         {/* Logo */}
-        <Link
-          href="/"
-          aria-label="Poovar boating and Poovar island boating home page"
-        >
+        <Link href="/" aria-label="Kayaloram Cruise Home">
           <Image
-            src="/logo.png"
-            alt="Kayaloram Cruise logo – Poovar boating and Poovar island boating"
+            src="/logo.webp"
+            alt="Kayaloram Cruise – Poovar boating logo"
             width={120}
             height={40}
             className="h-8 sm:h-10 w-auto drop-shadow-lg"
@@ -84,16 +82,12 @@ export default function Navbar({ navItems }: NavbarProps) {
           />
         </Link>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Toggle */}
         <button
           onClick={() => setIsMenuOpen((prev) => !prev)}
           className="md:hidden text-white text-2xl"
-          aria-label={
-            isMenuOpen
-              ? "Close Poovar boating navigation menu"
-              : "Open Poovar boating navigation menu"
-          }
           aria-expanded={isMenuOpen}
+          aria-label="Toggle navigation menu"
         >
           {isMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
@@ -112,7 +106,6 @@ export default function Navbar({ navItems }: NavbarProps) {
               >
                 <Link
                   href={item.path}
-                  aria-label={`Navigate to ${item.name} – Poovar boating information`}
                   className={`font-semibold px-4 py-2 rounded-full transition ${
                     isActive
                       ? "bg-green-300/80 text-green-900 shadow-md"
@@ -126,7 +119,6 @@ export default function Navbar({ navItems }: NavbarProps) {
                       variants={underlineVariants}
                       initial="initial"
                       whileHover="hover"
-                      aria-hidden="true"
                     />
                   </span>
                 </Link>
@@ -146,26 +138,19 @@ export default function Navbar({ navItems }: NavbarProps) {
             initial="hidden"
             animate="visible"
             exit="exit"
-            role="menu"
-            aria-label="Mobile navigation menu for Poovar boating pages"
           >
             {navItems.map((item) => {
               const isActive = pathname === item.path;
               return (
                 <motion.li
                   key={item.name}
-                  variants={itemVariants}
-                  initial="initial"
-                  whileHover="hover"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <Link
                     href={item.path}
-                    role="menuitem"
-                    aria-label={`Open ${item.name} page related to Poovar boating`}
                     className={`block text-lg font-semibold px-6 py-2 rounded-full transition ${
                       isActive
-                        ? "bg-green-300/80 text-green-900 shadow-md"
+                        ? "bg-green-300/80 text-green-900"
                         : "text-white hover:bg-green-200/40 hover:text-green-900"
                     }`}
                   >

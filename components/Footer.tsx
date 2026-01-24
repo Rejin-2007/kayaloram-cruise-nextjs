@@ -20,7 +20,7 @@ export default function Footer() {
         {/* Logo */}
         <div className="flex flex-col items-center md:items-start gap-3">
           <Image
-            src="/logo.png"
+            src="/logo.webp"
             alt="Kayaloram Resort – Poovar Boating and Poovar Island Boating"
             width={220}
             height={80}

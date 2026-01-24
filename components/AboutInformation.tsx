@@ -31,7 +31,7 @@ export default function AboutInformation() {
       >
         <figure className="overflow-hidden rounded-2xl border border-white/40 bg-white/10 shadow-xl backdrop-blur-xl">
           <Image
-            src="/aboutimg.jpeg"
+            src="/aboutimg.webp"
             alt="Poovar boating and Poovar island boating through Kerala backwaters, mangroves, and golden beach"
             title="Poovar Boating & Poovar Island Backwater Cruise in Kerala"
             width={380}

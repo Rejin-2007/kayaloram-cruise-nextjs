@@ -6,19 +6,19 @@ import { FaArrowRight, FaArrowLeft, FaTimes } from "react-icons/fa";
 
 const yachtData = [
   {
-    image: "/estuary.jpg",
+    image: "/estuary.webp",
     title: "Poovar Estuary",
     description:
       "Experience the stunning Poovar Estuary where the Neyyar River meets the Arabian Sea. A highlight of Poovar boating and Poovar island boating, ideal for Kerala backwater cruises, kayaking, bird watching, and nature photography.",
   },
   {
-    image: "/marymatha.jpeg",
+    image: "/marymatha.webp",
     title: "Mary Matha Statue Poovar",
     description:
       "The famous Mary Matha Statue near Poovar Island Beach is a spiritual and scenic landmark included in many Poovar boating and Poovar sightseeing tours through Kerala backwaters.",
   },
   {
-    image: "/elephant-rock-island.jpg",
+    image: "/elephant-rock-island.webp",
     title: "Elephant Rock Island Poovar",
     description:
       "Elephant Rock Island is one of Poovar’s hidden gems, popular for Poovar island boating, calm backwater cruises, photography, and peaceful exploration of Kerala’s untouched waterways.",

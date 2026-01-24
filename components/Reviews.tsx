@@ -10,7 +10,7 @@ const reviews = [
       "Very good experience.. we are so happy with the lovely host Rajesh boat driving and explain the same... I will give 5 star Thanks Kayaloram Backwater",
     user: {
       name: "DARKVILLER GAMING",
-      avatar: "https://randomuser.me/api/portraits/men/1.jpg",
+      avatar: "https://randomuser.me/api/portraits/men/1.webp",
     },
   },
   {
@@ -19,7 +19,7 @@ const reviews = [
       "It was an amazing experience for me and my friends... Would strongly recommend this cruise.",
     user: {
       name: "GAYATRI VAGAL",
-      avatar: "https://randomuser.me/api/portraits/women/2.jpg",
+      avatar: "https://randomuser.me/api/portraits/women/2.webp",
     },
   },
   {
@@ -28,7 +28,7 @@ const reviews = [
       "We went for boating from Kayaloram resort... clean and less crowded beach.",
     user: {
       name: "NEETING BABY",
-      avatar: "https://randomuser.me/api/portraits/women/3.jpg",
+      avatar: "https://randomuser.me/api/portraits/women/3.webp",
     },
   },
   {
@@ -37,7 +37,7 @@ const reviews = [
       "Kayaloram boating experience is too good! Must visit this place with your loved ones.",
     user: {
       name: "JEYBN 4",
-      avatar: "https://randomuser.me/api/portraits/men/4.jpg",
+      avatar: "https://randomuser.me/api/portraits/men/4.webp",
     },
   },
 ];

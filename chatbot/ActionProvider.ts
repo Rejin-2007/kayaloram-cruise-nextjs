@@ -1,10 +1,21 @@
+"use client";
+
+import { createChatBotMessage } from "react-chatbot-kit";
+
+type CreateChatBotMessage = (
+  message: string,
+  options?: Record<string, any>
+) => any;
+
+type SetStateFunc = React.Dispatch<React.SetStateAction<any>>;
+
 class ActionProvider {
-  private createChatBotMessage: (message: string, options?: any) => any;
-  private setState: (fn: (prev: any) => any) => void;
+  private createChatBotMessage: CreateChatBotMessage;
+  private setState: SetStateFunc;
 
   constructor(
-    createChatBotMessage: (message: string, options?: any) => any,
-    setStateFunc: (fn: (prev: any) => any) => void
+    createChatBotMessage: CreateChatBotMessage,
+    setStateFunc: SetStateFunc
   ) {
     this.createChatBotMessage = createChatBotMessage;
     this.setState = setStateFunc;
@@ -12,7 +23,8 @@ class ActionProvider {
 
   handleBooking = () => {
     const message = this.createChatBotMessage(
-      "🚤 You can book a cruise by calling or WhatsApp!",
+      "You can book a cruise by calling or WhatsApp!",
+      {} // 👈 REQUIRED for TypeScript
     );
 
     this.setState((prev: any) => ({

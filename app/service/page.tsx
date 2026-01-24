@@ -3,12 +3,12 @@ import { FaWhatsapp } from "react-icons/fa";
 
 /* ---------- Cards Data ---------- */
 const cards = [
-  { title: "Sunrise Cruise", img: "/sunrise.jpeg", link: "#" },
-  { title: "Sunset Cruise", img: "/sunset.jpeg", link: "#" },
-  { title: "Lunch Cruise", img: "/lunch.jpeg", link: "#" },
-  { title: "Standard Cruise", img: "/standard.jpg", link: "#" },
-  { title: "Deluxe Cruise", img: "/Deluxe.jpeg", link: "#" },
-  { title: "Premium Cruise", img: "/Premium.jpg", link: "#" },
+  { title: "Sunrise Cruise", img: "/sunrise.webp", link: "#" },
+  { title: "Sunset Cruise", img: "/sunset.webp", link: "#" },
+  { title: "Lunch Cruise", img: "/lunch.webp", link: "#" },
+  { title: "Standard Cruise", img: "/standard.webp", link: "#" },
+  { title: "Deluxe Cruise", img: "/Deluxe.webp", link: "#" },
+  { title: "Premium Cruise", img: "/Premium.webp", link: "#" },
 ];
 
 /* ---------- Page Metadata for SEO ---------- */

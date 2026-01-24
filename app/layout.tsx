@@ -4,10 +4,9 @@ import "./globals.css";
 
 import Navbar from "@/components/Navbar";
 import FloatingContactButtons from "@/components/FloatingContactButtons";
-import TawkToChat from "@/components/TawkToChat";
 import Footer from "@/components/Footer";
 import OfferPopup from "@/components/OfferPopup";
-import Script from "next/script";
+import TawkToChat from "@/components/TawkToChat";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -47,7 +46,7 @@ export const metadata: Metadata = {
     siteName: "Kayaloram Cruise Poovar",
     images: [
       {
-        url: "/firstImage.jpg",
+        url: "/firstImage.webp",
         width: 1200,
         height: 630,
         alt: "Poovar boating and Poovar island boating with Kayaloram Cruise",
@@ -62,7 +61,7 @@ export const metadata: Metadata = {
       "Poovar Boating & Poovar Island Boating | Kayaloram Cruise",
     description:
       "Explore Poovar boating, island boating, Kerala backwater cruises & golden beach tours with Kayaloram.",
-    images: ["/firstImage.jpg"],
+    images: ["/firstImage.webp"],
   },
 };
 
@@ -83,23 +82,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} bg-emerald-950`}>
       <body className="min-h-screen font-sans">
-        {/* Non-blocking third-party scripts */}
-        <Script
-          src="https://checkout.razorpay.com/v1/checkout.js"
-          strategy="afterInteractive"
-        />
-
         {/* Global Components */}
         <OfferPopup />
-        <TawkToChat />
-
+        <div className="fixed bottom-0 left-0  z-50">
+          <TawkToChat />
+        </div>
         {/* Navbar */}
         <div className="fixed top-0 left-0 w-full z-50">
           <Navbar navItems={navItems} />
         </div>
 
         {/* Page Content */}
-        <main className="pt-20">
+        <main className="">
           {children}
           <FloatingContactButtons />
         </main>

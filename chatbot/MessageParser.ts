@@ -1,3 +1,5 @@
+"use client";
+
 class MessageParser {
   private actionProvider: any;
 
@@ -6,19 +8,10 @@ class MessageParser {
   }
 
   parse(message: string) {
-    if (!message) return;
+    const lower = message.toLowerCase();
 
-    const lower = message.toLowerCase().trim();
-
-    if (
-      lower.includes("book") ||
-      lower.includes("booking") ||
-      lower.includes("price") ||
-      lower.includes("contact") ||
-      lower.includes("whatsapp")
-    ) {
+    if (lower.includes("booking")) {
       this.actionProvider.handleBooking();
-      return;
     }
   }
 }
