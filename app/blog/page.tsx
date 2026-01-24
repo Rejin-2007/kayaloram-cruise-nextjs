@@ -4,17 +4,23 @@ import type { Metadata } from "next";
 /* ---------- SEO Metadata ---------- */
 export const metadata: Metadata = {
   title:
-    "Poovar Boating Blog | Poovar Island Boating News & Stories | Kayaloram Resort",
+    "Poovar Boating Blog | Poovar Island Boating News, Tips & Stories | Kayaloram Resort",
   description:
-    "Read stories, tips, and news about Poovar boating, Poovar island boating, and Kayaloram Resort. Discover Kerala backwater tours, golden beach cruises, and unforgettable boating experiences.",
+    "Explore the Poovar Boating Blog for the latest news, travel tips, stories, and guides on Poovar island boating, Kerala backwater cruises, golden beach boating, and Kayaloram Resort experiences.",
   keywords: [
     "Poovar boating blog",
-    "Poovar island boating",
-    "Kayaloram Resort",
-    "Kerala boating news",
-    "boating stories",
-    "Kerala backwater tour",
-    "golden beach cruise",
+    "Poovar island boating blog",
+    "Kayaloram Resort blog",
+    "Poovar boating news",
+    "Poovar boating tips",
+    "Kerala backwater boating blog",
+    "Poovar golden beach cruise",
+    "Poovar river cruise",
+    "Poovar tourism blog",
+    "Trivandrum backwater boating",
+    "Poovar boat service updates",
+    "Kerala boating experiences",
+    "Poovar travel guide",
   ],
   alternates: {
     canonical: "https://www.poovarislandboating.com/blog",

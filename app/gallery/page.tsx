@@ -4,15 +4,21 @@ import { getGalleryImages, getAltText } from "../../lib/gallery";
 
 /* ---------- SEO Metadata ---------- */
 export const metadata: Metadata = {
-  title: "Poovar Boating Gallery | Poovar Island Boating Photos | Kayaloram Resort",
+  title:
+    "Poovar Boating Gallery | Poovar Island Boating Photos & Kerala Backwaters | Kayaloram Resort",
   description:
-    "Browse photos of Poovar boating, Poovar island boating, Kerala backwater tours, and Kayaloram Resort.",
+    "Explore the Poovar Boating Gallery featuring Poovar island boating photos, Kerala backwater cruises, golden beach views, and Kayaloram Resort boating experiences.",
   keywords: [
-    "Poovar boating",
-    "Poovar island boating",
-    "Kayaloram Resort",
-    "Kerala backwater tour",
-    "boating gallery",
+    "Poovar boating gallery",
+    "Poovar island boating photos",
+    "Kayaloram Resort gallery",
+    "Kerala backwater boating images",
+    "Poovar golden beach boating",
+    "Poovar river cruise photos",
+    "Trivandrum backwater boating",
+    "Kerala boating tourism",
+    "Poovar boat service images",
+    "Poovar sightseeing boating",
   ],
   alternates: {
     canonical: "https://www.poovarislandboating.com/gallery",
@@ -26,7 +32,7 @@ export default function GalleryPage() {
   return (
     <main
       className="w-full min-h-screen bg-emerald-950 mt-16 px-4"
-      aria-label="Poovar boating and Poovar island boating photo gallery"
+      aria-label="Poovar boating, Poovar island boating and Kerala backwater photo gallery"
     >
       <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-10 text-center">
         Poovar Boating & Poovar Island Boating Gallery

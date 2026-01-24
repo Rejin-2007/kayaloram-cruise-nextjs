@@ -89,24 +89,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} bg-emerald-950`}>
       <body className="min-h-screen font-sans">
-        {/* Global Components */}
         <OfferPopup />
-
-        {/* Tawk Chat */}
         <TawkToChat />
 
-        {/* Navbar */}
         <div className="fixed top-0 left-0 w-full z-50">
           <Navbar navItems={navItems} />
         </div>
 
-        {/* Page Content */}
         <main>
           {children}
           <FloatingContactButtons />
         </main>
 
-        {/* Footer */}
         <Footer />
       </body>
     </html>

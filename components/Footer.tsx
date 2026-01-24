@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { HiPhone } from "react-icons/hi";
 import { SiGmail } from "react-icons/si";
@@ -16,7 +17,13 @@ export default function Footer() {
       className="w-full px-4 py-12 bg-emerald-950 border-t border-green-400/10 shadow-inner"
       aria-label="Poovar Boating and Poovar Island Boating Footer"
     >
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+      <motion.div
+        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         {/* Logo */}
         <div className="flex flex-col items-center md:items-start gap-3">
           <Image
@@ -43,7 +50,8 @@ export default function Footer() {
             <a
               href="mailto:rajeshkayaloram@gmail.com"
               className="text-lime-100 underline hover:text-lime-200 break-all"
-              aria-label="Email Kayaloram Resort"
+              aria-label="Email Kayaloram Resort for Poovar boating enquiries"
+              title="Email Poovar Boating"
             >
               rajeshkayaloram@gmail.com
             </a>
@@ -74,6 +82,7 @@ export default function Footer() {
                 href="tel:+918139031924"
                 className="underline block"
                 aria-label="Call Poovar Boating at 8139031924"
+                title="Call Poovar Boating"
               >
                 +91 81390 31924
               </a>
@@ -81,48 +90,51 @@ export default function Footer() {
                 href="tel:+918075413797"
                 className="underline block"
                 aria-label="Call Poovar Boating at 8075413797"
+                title="Call Poovar Boating"
               >
                 +91 80754 13797
               </a>
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Social Media */}
       <nav
         className="flex justify-center gap-8 mt-12"
         aria-label="Poovar Boating Social Media Links"
       >
-        <a
-          href="https://www.instagram.com/poovar.boating"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={socialButtonClasses}
-          aria-label="Poovar Boating Instagram"
-        >
-          <FaInstagram className="text-lime-400 text-2xl" />
-        </a>
+        {[FaInstagram, FaYoutube, FaFacebook].map((Icon, i) => {
+          const links = [
+            "https://www.instagram.com/poovar.boating",
+            "https://www.youtube.com/@rajeshmathias6014",
+            "https://www.facebook.com/share/1YPM77byhM/",
+          ];
+          const labels = [
+            "Poovar Boating Instagram",
+            "Poovar Boating YouTube",
+            "Poovar Boating Facebook",
+          ];
+          const colors = ["text-lime-400", "text-red-400", "text-blue-500"];
 
-        <a
-          href="https://www.youtube.com/@rajeshmathias6014"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={socialButtonClasses}
-          aria-label="Poovar Boating YouTube"
-        >
-          <FaYoutube className="text-red-400 text-2xl" />
-        </a>
-
-        <a
-          href="https://www.facebook.com/share/1YPM77byhM/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={socialButtonClasses}
-          aria-label="Poovar Boating Facebook"
-        >
-          <FaFacebook className="text-blue-500 text-2xl" />
-        </a>
+          return (
+            <motion.a
+              key={i}
+              href={links[i]}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              aria-label={labels[i]}
+              title={labels[i]}
+              className={socialButtonClasses}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15 }}
+            >
+              <Icon className={`${colors[i]} text-2xl`} />
+            </motion.a>
+          );
+        })}
       </nav>
 
       {/* Copyright */}
