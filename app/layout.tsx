@@ -16,14 +16,18 @@ const inter = Inter({
 
 /* ---------- Global SEO Metadata ---------- */
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.poovarislandboating.com"),
+
   title: {
     default:
       "Poovar Boating & Poovar Island Boating | Kayaloram Cruise Kerala",
     template:
       "%s | Poovar Boating & Poovar Island Boating – Kayaloram",
   },
+
   description:
     "Experience Poovar boating and Poovar island boating with Kayaloram Cruise. Enjoy Kerala backwater cruises, mangrove forest boating, and golden beach tours in Poovar.",
+
   keywords: [
     "Poovar boating",
     "Poovar island boating",
@@ -34,9 +38,11 @@ export const metadata: Metadata = {
     "Mangrove forest boating",
     "Poovar boating packages",
   ],
+
   alternates: {
     canonical: "https://www.poovarislandboating.com",
   },
+
   openGraph: {
     title:
       "Poovar Boating & Poovar Island Boating | Kayaloram Cruise Kerala",
@@ -55,6 +61,7 @@ export const metadata: Metadata = {
     locale: "en_IN",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
     title:
@@ -84,16 +91,17 @@ export default function RootLayout({
       <body className="min-h-screen font-sans">
         {/* Global Components */}
         <OfferPopup />
-        <div className="fixed bottom-0 left-0  z-50">
-          <TawkToChat />
-        </div>
+
+        {/* Tawk Chat */}
+        <TawkToChat />
+
         {/* Navbar */}
         <div className="fixed top-0 left-0 w-full z-50">
           <Navbar navItems={navItems} />
         </div>
 
         {/* Page Content */}
-        <main className="">
+        <main>
           {children}
           <FloatingContactButtons />
         </main>
