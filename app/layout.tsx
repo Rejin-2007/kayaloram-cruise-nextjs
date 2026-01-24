@@ -7,6 +7,7 @@ import FloatingContactButtons from "@/components/FloatingContactButtons";
 import Footer from "@/components/Footer";
 import OfferPopup from "@/components/OfferPopup";
 import TawkToChat from "@/components/TawkToChat";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -98,6 +99,16 @@ export default function RootLayout({
 
         <main>
           {children}
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              style: {
+                background: "#0f172a",
+                color: "#CDFFF5",
+                border: "1px solid #CDFFF5",
+              },
+            }}
+          />
           <FloatingContactButtons />
         </main>
 

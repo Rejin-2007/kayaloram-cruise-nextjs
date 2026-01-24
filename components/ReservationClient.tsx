@@ -2,35 +2,65 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaPhoneAlt, FaCalendarAlt, FaShip } from "react-icons/fa";
+import { FaPhoneAlt, FaCalendarAlt, FaShip, FaUser } from "react-icons/fa";
+import emailjs from "@emailjs/browser";
+import toast from "react-hot-toast";
 
-type Package = { label: string; value: string };
-
-const packages: Package[] = [
-  { label: "Golden Beach Cruise", value: "golden" },
-  { label: "Island Boating Tour", value: "island" },
-  { label: "Full Day Backwater Tour", value: "backwater" },
+/* Packages from cards */
+const cards = [
+  { title: "Sunrise Cruise", },
+  { title: "Sunset Cruise", },
+  { title: "Lunch Cruise", },
+  { title: "Standard Cruise", },
+  { title: "Deluxe Cruise", },
+  { title: "Premium Cruise", },
 ];
 
 export default function ReservationClient() {
+  const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState("");
-  const [packageType, setPackageType] = useState(packages[0].value);
+  const [packageName, setPackageName] = useState(cards[0].title);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    console.log({
+    const templateParams = {
+      name,
       phone,
-      date,
-      packageType,
-    });
+      ride_date: date,
+      package_name: packageName,
+    };
 
-    alert("Your Poovar boating enquiry has been submitted successfully!");
-    setLoading(false);
+    try {
+      await emailjs.send(
+        "service_smh1c0p",
+        "template_22f9sbp",
+        templateParams,
+        "M40cSVMnA_AywFy2-"
+      );
+
+      toast.success("Boating enquiry sent successfully 🚤");
+
+      setName("");
+      setPhone("");
+      setDate("");
+      setPackageName(cards[0].title);
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      alert("Failed to send enquiry. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const inputClass =
+    "w-full mt-2 p-2 rounded-lg text-black bg-white " +
+    "border border-[#CDFFF5]/60 " +
+    " " +
+    "focus:outline-none focus:ring-2 focus:ring-[#CDFFF5]/50";
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-emerald-950 px-4">
@@ -43,8 +73,23 @@ export default function ReservationClient() {
         aria-label="Poovar boating reservation form"
       >
         <h1 className="text-2xl font-bold mb-6 text-center text-lime-200">
-          Book Your Poovar Boating Package
+          Book Your Poovar Boating Ride
         </h1>
+
+        {/* Name */}
+        <label className="block mb-4">
+          <span className="flex items-center gap-2">
+            <FaUser className="text-lime-300" /> Name
+          </span>
+          <input
+            type="text"
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className={inputClass}
+            placeholder="Your Name"
+          />
+        </label>
 
         {/* Phone */}
         <label className="block mb-4">
@@ -56,7 +101,7 @@ export default function ReservationClient() {
             required
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full mt-2 p-2 rounded-lg text-black"
+            className={inputClass}
             placeholder="+91 1234567890"
           />
         </label>
@@ -64,14 +109,14 @@ export default function ReservationClient() {
         {/* Date */}
         <label className="block mb-4">
           <span className="flex items-center gap-2">
-            <FaCalendarAlt className="text-lime-300" /> Date
+            <FaCalendarAlt className="text-lime-300" /> Ride Date
           </span>
           <input
             type="date"
             required
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full mt-2 p-2 rounded-lg text-black"
+            className={inputClass}
           />
         </label>
 
@@ -82,13 +127,13 @@ export default function ReservationClient() {
           </span>
           <select
             required
-            value={packageType}
-            onChange={(e) => setPackageType(e.target.value)}
-            className="w-full mt-2 p-2 rounded-lg text-black"
+            value={packageName}
+            onChange={(e) => setPackageName(e.target.value)}
+            className={inputClass}
           >
-            {packages.map((p) => (
-              <option key={p.value} value={p.value}>
-                {p.label}
+            {cards.map((card) => (
+              <option key={card.title} value={card.title}>
+                {card.title}
               </option>
             ))}
           </select>

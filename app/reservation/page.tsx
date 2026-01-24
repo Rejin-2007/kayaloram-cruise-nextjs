@@ -1,4 +1,4 @@
-import ReservationClient from "./ReservationClient";
+import ReservationClient from "../../components/ReservationClient";
 import type { Metadata } from "next";
 
 /* ---------- SEO Metadata ---------- */
