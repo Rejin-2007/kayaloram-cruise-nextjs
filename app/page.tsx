@@ -5,7 +5,6 @@ import HomeEntry from "@/components/HomeEntry";
 import ExplorationViews from "@/components/ExplorationViews";
 import GlassCardGrid from "./service/page";
 import FAQ from "@/components/FAQ";
-import ChatBotUI from "../chatbot/ChatBotUI";
 
 /* ---------- SEO Metadata ---------- */
 export const metadata = {
