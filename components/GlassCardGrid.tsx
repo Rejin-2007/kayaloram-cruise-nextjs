@@ -43,11 +43,13 @@ export default function GlassCardGrid() {
                 )}%20Poovar%20boating`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-green-300 font-semibold"
+                className="inline-flex items-center gap-2 text-green-300 font-semibold animate-pulse"
                 aria-label={`WhatsApp enquiry for ${c.title} Poovar boating`}
               >
-                <FaWhatsapp /> WhatsApp Enquiry
+                <FaWhatsapp className="text-xl" />
+                WhatsApp Enquiry
               </a>
+
             </div>
           </article>
         ))}
