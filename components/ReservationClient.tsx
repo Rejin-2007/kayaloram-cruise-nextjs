@@ -28,33 +28,47 @@ export default function ReservationClient() {
     setLoading(true);
 
     const templateParams = {
-      name,
-      phone,
+      subject: "🚤 New Boating Enquiry Received",
+      customer_name: name,
+      customer_phone: phone,
       ride_date: date,
       package_name: packageName,
+      message: `
+New boating enquiry details:
+
+👤 Name: ${name}
+📞 Phone: ${phone}
+📅 Ride Date: ${date}
+📦 Package: ${packageName}
+
+Please contact the customer as soon as possible.
+    `,
     };
 
     try {
       await emailjs.send(
-        "service_smh1c0p",
-        "template_22f9sbp",
+        "service_smh1c0p",      // EmailJS Service ID
+        "template_22f9sbp",     // EmailJS Template ID
         templateParams,
-        "M40cSVMnA_AywFy2-"
+        "M40cSVMnA_AywFy2-"     // Public Key
       );
 
       toast.success("Boating enquiry sent successfully 🚤");
 
+      // Reset form
       setName("");
       setPhone("");
       setDate("");
       setPackageName(cards[0].title);
+
     } catch (error) {
       console.error("EmailJS Error:", error);
-      alert("Failed to send enquiry. Please try again.");
+      toast.error("Failed to send enquiry. Please try again.");
     } finally {
       setLoading(false);
     }
   };
+
 
   const inputClass =
     "w-full mt-2 p-2 rounded-lg text-black bg-white " +
