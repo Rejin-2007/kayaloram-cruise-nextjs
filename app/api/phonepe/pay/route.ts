@@ -3,39 +3,33 @@ import crypto from "crypto";
 
 export async function POST() {
   try {
-    const amount = 1000; // ₹10 FIXED ON BACKEND
-
     const merchantTransactionId = "TXN_" + Date.now();
-    const merchantUserId = "USER_" + Date.now();
 
     const payload = {
       merchantId: process.env.PHONEPE_MERCHANT_ID!,
       merchantTransactionId,
-      merchantUserId,
-      amount, // in paise
-      redirectUrl: "https://poovarislandboating.com/payment/success",
-      redirectMode: "REDIRECT",
-      callbackUrl: "https://poovarislandboating.com/api/phonepe/callback",
+      merchantUserId: "USER_001",
+      amount: 30000, // ₹300 FIXED
+      redirectUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/phonepe/status`,
+      redirectMode: "POST",
+      callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/phonepe/status`,
       paymentInstrument: {
         type: "PAY_PAGE",
       },
     };
 
-    const base64Payload = Buffer
-      .from(JSON.stringify(payload))
-      .toString("base64");
-
-    // 🚨 THIS PATH MUST MATCH EXACTLY
-    const apiPath = "/pg/v1/pay";
+    const base64Payload = Buffer.from(
+      JSON.stringify(payload)
+    ).toString("base64");
 
     const checksum =
       crypto
         .createHash("sha256")
-        .update(base64Payload + apiPath + process.env.PHONEPE_CLIENT_SECRET!)
+        .update(base64Payload + "/pg/v1/pay" + process.env.PHONEPE_CLIENT_SECRET)
         .digest("hex") + "###1";
 
     const response = await fetch(
-      "https://api.phonepe.com/apis/pg/v1/pay",
+      `${process.env.PHONEPE_BASE_URL}/pg/v1/pay`,
       {
         method: "POST",
         headers: {
@@ -49,26 +43,19 @@ export async function POST() {
     );
 
     const data = await response.json();
-
-    console.log("📦 PHONEPE PROD RESPONSE:", data);
+    console.log("📦 PHONEPE RESPONSE:", data);
 
     if (!data.success) {
-      return NextResponse.json(
-        { success: false, error: data },
-        { status: 400 }
-      );
+      return NextResponse.json(data, { status: 400 });
     }
 
     return NextResponse.json({
-      success: true,
-      redirectUrl:
-        data.data.instrumentResponse.redirectInfo.url,
+      url: data.data.instrumentResponse.redirectInfo.url,
     });
-
   } catch (err) {
-    console.error("❌ SERVER ERROR:", err);
+    console.error("❌ PHONEPE ERROR:", err);
     return NextResponse.json(
-      { success: false },
+      { message: "Payment init failed" },
       { status: 500 }
     );
   }
