@@ -23,8 +23,6 @@ export default function ReservationClient() {
   const [packageName, setPackageName] = useState(cards[0].title);
   const [loading, setLoading] = useState(false);
 
-  "use client";
-
   const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -35,23 +33,18 @@ export default function ReservationClient() {
 
       const result = await res.json();
 
-      if (!result.success) {
+      if (!result.success || !result.redirectUrl) {
         throw new Error("Payment init failed");
       }
 
+      // 🔥 Redirect to PhonePe hosted page
       window.location.href = result.redirectUrl;
 
     } catch (err) {
-      console.error(err);
+      console.error("❌ PAYMENT ERROR:", err);
       alert("Unable to start payment");
     }
   };
-
-
-
-
-
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
