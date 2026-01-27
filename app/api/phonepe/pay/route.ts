@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 
-export async function POST(req: Request) {
+export async function POST() {
   try {
-    const { amount } = await req.json();
+    /* ================= FIXED AMOUNT ================= */
+    const amount = 1000; // ✅ in paise → ₹10 (CHANGE AS NEEDED)
 
     const merchantTransactionId = "TXN_" + Date.now();
     const merchantUserId = "USER_" + Date.now();
@@ -12,7 +13,7 @@ export async function POST(req: Request) {
       merchantId: process.env.PHONEPE_MERCHANT_ID!,
       merchantTransactionId,
       merchantUserId,
-      amount, // in paise (1000 = ₹10)
+      amount,
       redirectUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/success`,
       redirectMode: "REDIRECT",
       callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/phonepe/callback`,
@@ -21,12 +22,18 @@ export async function POST(req: Request) {
       },
     };
 
-    const base64Payload = Buffer.from(JSON.stringify(payload)).toString("base64");
+    const base64Payload = Buffer.from(
+      JSON.stringify(payload)
+    ).toString("base64");
 
     const checksum =
       crypto
         .createHash("sha256")
-        .update(base64Payload + "/pg/v1/pay" + process.env.PHONEPE_CLIENT_SECRET)
+        .update(
+          base64Payload +
+            "/pg/v1/pay" +
+            process.env.PHONEPE_CLIENT_SECRET
+        )
         .digest("hex") + "###1";
 
     const response = await fetch(
@@ -44,7 +51,7 @@ export async function POST(req: Request) {
     const data = await response.json();
 
     if (!data.success) {
-      console.error("❌ PhonePe PROD ERROR:", data);
+      console.error("❌ PhonePe ERROR:", data);
       return NextResponse.json(
         { success: false, message: "Unable to start payment" },
         { status: 400 }
@@ -53,9 +60,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       success: true,
-      redirectUrl: data.data.instrumentResponse.redirectInfo.url,
+      redirectUrl:
+        data.data.instrumentResponse.redirectInfo.url,
     });
-
   } catch (err) {
     console.error("❌ SERVER ERROR:", err);
     return NextResponse.json(

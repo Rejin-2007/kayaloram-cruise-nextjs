@@ -25,30 +25,29 @@ export default function ReservationClient() {
 
   "use client";
 
-const handlePayment = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handlePayment = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  try {
-    const res = await fetch("/api/phonepe/pay", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: 1000 }),
-    });
+    try {
+      const res = await fetch("/api/phonepe/pay", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
 
-    const data = await res.json();
+      const result = await res.json();
 
-    if (!data.success || !data.redirectUrl) {
-      throw new Error("Payment init failed");
+      if (!result.success || !result.redirectUrl) {
+        throw new Error("Unable to start payment");
+      }
+
+      window.location.href = result.redirectUrl;
+    } catch (err) {
+      console.error(err);
+      alert("Unable to start payment");
     }
+  };
 
-    // ✅ REDIRECT (ONLY WAY)
-    window.location.href = data.redirectUrl;
 
-  } catch (err) {
-    console.error(err);
-    alert("Unable to start payment");
-  }
-};
 
 
 
