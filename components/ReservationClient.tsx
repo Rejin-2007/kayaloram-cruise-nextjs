@@ -31,21 +31,22 @@ export default function ReservationClient() {
     try {
       const res = await fetch("/api/phonepe/pay", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
       });
 
       const result = await res.json();
 
-      if (!result.success || !result.redirectUrl) {
-        throw new Error("Unable to start payment");
+      if (!result.success) {
+        throw new Error("Payment init failed");
       }
 
       window.location.href = result.redirectUrl;
+
     } catch (err) {
       console.error(err);
       alert("Unable to start payment");
     }
   };
+
 
 
 

@@ -1,11 +1,10 @@
-import SuccessPage from '@/components/SuccessPage'
-
-const page = () => {
+export default function PaymentSuccess() {
   return (
-    <div>
-        <SuccessPage />
+    <div className="p-10 text-center">
+      <h1 className="text-2xl font-bold text-green-600">
+        Payment Successful 🎉
+      </h1>
+      <p>You will receive confirmation shortly.</p>
     </div>
-  )
+  );
 }
-
-export default page
