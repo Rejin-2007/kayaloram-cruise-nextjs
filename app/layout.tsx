@@ -8,7 +8,6 @@ import Footer from "@/components/Footer";
 import OfferPopup from "@/components/OfferPopup";
 import TawkToChat from "@/components/TawkToChat";
 import { Toaster } from "react-hot-toast";
-import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,7 +18,9 @@ const inter = Inter({
 /* ---------- Global SEO Metadata ---------- */
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.poovarislandboating.com"),
-
+  icons: {
+    icon: "/favicon.webp",
+  },
   title: {
     default:
       "Poovar Boating & Poovar Island Boating | Kayaloram Cruise Kerala",
@@ -114,7 +115,7 @@ export default function RootLayout({
         </main>
 
         <Footer />
-        
+
       </body>
     </html>
   );
