@@ -23,6 +23,35 @@ export default function ReservationClient() {
   const [packageName, setPackageName] = useState(cards[0].title);
   const [loading, setLoading] = useState(false);
 
+  "use client";
+
+const handlePayment = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    const res = await fetch("/api/phonepe/pay", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount: 1000 }),
+    });
+
+    const data = await res.json();
+
+    if (!data.success || !data.redirectUrl) {
+      throw new Error("Payment init failed");
+    }
+
+    // ✅ REDIRECT (ONLY WAY)
+    window.location.href = data.redirectUrl;
+
+  } catch (err) {
+    console.error(err);
+    alert("Unable to start payment");
+  }
+};
+
+
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -79,7 +108,7 @@ Please contact the customer as soon as possible.
   return (
     <div className="min-h-screen flex items-center justify-center bg-emerald-950 px-4">
       <motion.form
-        onSubmit={handleSubmit}
+        onSubmit={handlePayment}
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}

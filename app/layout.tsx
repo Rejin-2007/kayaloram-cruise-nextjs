@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import OfferPopup from "@/components/OfferPopup";
 import TawkToChat from "@/components/TawkToChat";
 import { Toaster } from "react-hot-toast";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -113,6 +114,7 @@ export default function RootLayout({
         </main>
 
         <Footer />
+        
       </body>
     </html>
   );
