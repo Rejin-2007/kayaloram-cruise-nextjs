@@ -42,8 +42,7 @@ export default function Enquiry() {
         setFormData({ name: '', phone: '', message: '' });
         setSending(false);
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
         setStatus('❌ Failed to send enquiry. Please try again.');
         setSending(false);
       });
@@ -51,63 +50,65 @@ export default function Enquiry() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <main
+      <section
         className="flex min-h-screen items-center justify-center bg-emerald-950 p-6"
-        aria-label="Poovar boating enquiry and Kerala backwater tour booking section"
+        aria-label="Poovar boating enquiry and Kerala backwater cruise booking"
+        itemScope
+        itemType="https://schema.org/ContactPage"
       >
-        <section className="w-full max-w-lg rounded-2xl border border-white/30 bg-white/20 p-6 text-center shadow-2xl backdrop-blur-xl">
-          <h1 className="mb-3 text-3xl font-extrabold text-white">
-            Enquire About Poovar Boating & Kerala Backwater Cruises
-          </h1>
+        <div className="w-full max-w-lg rounded-2xl border border-white/30 bg-white/20 p-6 text-center shadow-2xl backdrop-blur-xl">
+          {/* Heading */}
+          <h2
+            className="mb-3 text-3xl font-extrabold text-white"
+            itemProp="headline"
+          >
+            Enquire About Poovar Boating & Backwater Cruises
+          </h2>
 
           <p className="mb-6 text-sm text-emerald-100">
-            Contact us for Poovar boating prices, packages, timings, and backwater
-            cruise bookings near Trivandrum.
+            Get details about Poovar boating price, timings, island boating,
+            mangrove cruises, and Kerala backwater tour bookings near Trivandrum.
           </p>
 
           {/* Tabs */}
           <nav
             className="mb-6 flex justify-center gap-4"
-            aria-label="Choose enquiry method for Poovar boating"
+            aria-label="Choose Poovar boating enquiry method"
           >
             {(['message', 'call'] as TabType[]).map((tab) => (
-              <m.button
+              <button
                 key={tab}
                 type="button"
                 onClick={() => setActiveTab(tab)}
-                className={`rounded-lg px-4 py-2 font-semibold ${
+                className={`rounded-lg px-4 py-2 font-semibold transition ${
                   activeTab === tab
                     ? 'bg-emerald-600 text-white'
                     : 'bg-gray-200 text-gray-700'
                 }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
                 aria-pressed={activeTab === tab}
               >
-                {tab === 'message' ? (
-                  <span className="flex items-center gap-2">
-                    <FaEnvelopeOpenText aria-hidden="true" focusable="false" />
-                    Message
-                  </span>
-                ) : (
-                  <span className="flex items-center gap-2">
-                    <FaPhoneAlt aria-hidden="true" focusable="false" />
-                    Call Us
-                  </span>
-                )}
-              </m.button>
+                <span className="flex items-center gap-2">
+                  {tab === 'message' ? (
+                    <FaEnvelopeOpenText aria-hidden="true" />
+                  ) : (
+                    <FaPhoneAlt aria-hidden="true" />
+                  )}
+                  {tab === 'message' ? 'Message' : 'Call Us'}
+                </span>
+              </button>
             ))}
           </nav>
 
+          {/* Content */}
           <AnimatePresence mode="wait">
             {activeTab === 'message' && (
               <m.form
-                key="form"
+                key="message"
                 onSubmit={handleSubmit}
                 className="space-y-4 text-left"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 aria-label="Poovar boating enquiry form"
               >
                 <input
@@ -116,7 +117,6 @@ export default function Enquiry() {
                   onChange={handleChange}
                   placeholder="Your Name"
                   required
-                  aria-label="Your name for Poovar boating enquiry"
                   className="w-full rounded bg-white/10 p-2 text-white"
                 />
 
@@ -126,7 +126,6 @@ export default function Enquiry() {
                   onChange={handleChange}
                   placeholder="Phone Number"
                   required
-                  aria-label="Phone number for Poovar boating contact"
                   className="w-full rounded bg-white/10 p-2 text-white"
                 />
 
@@ -134,32 +133,22 @@ export default function Enquiry() {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Message (Poovar boating package, date, or questions)"
+                  placeholder="Message (date, package, or Poovar boating query)"
                   required
-                  aria-label="Message regarding Poovar boating or backwater cruise"
+                  rows={4}
                   className="w-full rounded bg-white/10 p-2 text-white"
                 />
 
-                <m.button
+                <button
                   type="submit"
                   disabled={sending}
-                  className="w-full rounded bg-emerald-600 py-2 text-white"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  className="w-full rounded bg-emerald-600 py-2 font-semibold text-white"
                 >
-                  {sending
-                    ? 'Sending Enquiry...'
-                    : 'Submit Poovar Boating Enquiry'}
-                </m.button>
+                  {sending ? 'Sending Enquiry…' : 'Submit Enquiry'}
+                </button>
 
                 {status && (
-                  <m.p
-                    className="text-center text-amber-200"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                  >
-                    {status}
-                  </m.p>
+                  <p className="text-center text-amber-200">{status}</p>
                 )}
               </m.form>
             )}
@@ -171,20 +160,20 @@ export default function Enquiry() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                aria-label="Call for Poovar boating booking"
               >
                 <a
                   href="tel:+918139031924"
-                  className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3"
+                  className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold"
+                  aria-label="Call Kayaloram Cruise for Poovar boating booking"
                 >
-                  <FaPhoneAlt aria-hidden="true" focusable="false" />
+                  <FaPhoneAlt aria-hidden="true" />
                   Call +91 81390 31924
                 </a>
               </m.div>
             )}
           </AnimatePresence>
-        </section>
-      </main>
+        </div>
+      </section>
     </LazyMotion>
   );
 }

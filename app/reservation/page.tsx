@@ -1,23 +1,22 @@
 import ReservationClient from "../../components/ReservationClient";
 import type { Metadata } from "next";
 
-/* ---------- SEO Metadata ---------- */
+/* ---------- Reservation Page SEO Metadata ---------- */
 export const metadata: Metadata = {
   title:
-    "Poovar Boating Reservation | Book Poovar Island Boating & Backwater Cruise",
+    "Book Poovar Boating | Price, Timings & Island Boating Reservation",
   description:
-    "Reserve Poovar boating and Poovar island boating online at Kayaloram Resort. Book golden beach cruises, island boating tours, and Kerala backwater cruises with instant confirmation.",
+    "Book Poovar boating and Poovar island boating online. Check Poovar boating price, timings, mangrove backwater cruise options, golden beach sightseeing and reserve your boat ride instantly.",
   keywords: [
-    "Poovar boating reservation",
-    "Poovar island boating booking",
-    "Poovar boat service",
-    "Kerala backwater cruise booking",
-    "Golden beach cruise Poovar",
-    "Kayaloram Resort Poovar",
-    "Poovar boating price",
-    "Poovar boating online booking",
-    "Trivandrum backwater boating",
-    "Poovar tourism boating",
+    "poovar boating booking",
+    "poovar boating price",
+    "poovar boating timings",
+    "poovar island boating",
+    "poovar boat ride",
+    "poovar backwaters",
+    "poovar mangrove boating",
+    "poovar boating ticket price",
+    "poovar boating charges",
   ],
   alternates: {
     canonical: "https://www.poovarislandboating.com/reservation",
@@ -26,5 +25,23 @@ export const metadata: Metadata = {
 
 /* ---------- Reservation Page ---------- */
 export default function ReservationPage() {
-  return <ReservationClient />;
+  return (
+    <main className="w-full min-h-screen">
+      {/* PAGE HEADER */}
+      <header className="px-4 pt-20 pb-6 text-center">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-emerald-300">
+          Book Poovar Boating & Poovar Island Boating
+        </h1>
+        <p className="mt-3 text-sm md:text-base text-white">
+          Check Poovar boating price, timings, available packages and reserve your
+          backwater boat ride easily.
+        </p>
+      </header>
+
+      {/* BOOKING FORM */}
+      <section aria-label="Poovar boating reservation and booking form">
+        <ReservationClient />
+      </section>
+    </main>
+  );
 }

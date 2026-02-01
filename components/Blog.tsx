@@ -34,48 +34,73 @@ const blogContent = {
 
   links: [
     { label: "Book Poovar Boating", href: "/reservation" },
-    { label: "View Boating Packages", href: "/service" },
+    { label: "View Poovar Boating Packages", href: "/service" },
   ],
 };
 
 /* ---------- BLOG COMPONENT (SERVER) ---------- */
 export default function Blog() {
   return (
-    <section className="bg-emerald-950 text-white py-20 px-4">
-      {/* Centered Container */}
-      <div className="mx-auto max-w-4xl text-center">
-        {/* H1 */}
-        <h1 className="text-4xl font-extrabold tracking-tight mb-6">
+    <section
+      className="bg-emerald-950 text-white py-20 px-4"
+      aria-label="Poovar boating blog and travel guide"
+      itemScope
+      itemType="https://schema.org/Blog"
+    >
+      {/* Header */}
+      <header className="mx-auto max-w-4xl text-center">
+        <h1
+          className="text-4xl font-extrabold tracking-tight mb-6"
+          itemProp="headline"
+        >
           {blogContent.heading}
         </h1>
 
-        {/* Intro */}
-        <p className="mx-auto max-w-2xl text-lg text-gray-300 mb-16">
+        <p
+          className="mx-auto max-w-2xl text-lg text-gray-300 mb-16"
+          itemProp="description"
+        >
           {blogContent.intro}
         </p>
-      </div>
+      </header>
 
-      {/* Blog Sections */}
+      {/* Blog Articles */}
       <div className="mx-auto max-w-3xl space-y-12 px-2">
         {blogContent.sections.map((section, index) => (
           <article
             key={index}
             className="border border-emerald-400/20 rounded-2xl p-6 bg-white/5"
+            itemScope
+            itemType="https://schema.org/BlogPosting"
           >
-            <h2 className="text-2xl font-semibold mb-3 text-emerald-300">
+            <h2
+              className="text-2xl font-semibold mb-3 text-emerald-300"
+              itemProp="headline"
+            >
               {section.title}
             </h2>
-            <p className="text-gray-200 leading-relaxed">
+
+            <p
+              className="text-gray-200 leading-relaxed"
+              itemProp="articleBody"
+            >
               {section.content}
             </p>
           </article>
         ))}
       </div>
 
-      {/* Internal Links */}
-      <nav className="mt-16 flex flex-wrap justify-center gap-6 text-emerald-300 font-medium underline">
+      {/* Internal SEO Links */}
+      <nav
+        className="mt-16 flex flex-wrap justify-center gap-6 text-emerald-300 font-medium underline"
+        aria-label="Poovar boating internal links"
+      >
         {blogContent.links.map((link, index) => (
-          <a key={index} href={link.href}>
+          <a
+            key={index}
+            href={link.href}
+            className="hover:text-emerald-200"
+          >
             {link.label}
           </a>
         ))}

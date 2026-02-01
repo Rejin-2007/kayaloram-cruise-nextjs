@@ -5,7 +5,6 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import FloatingContactButtons from "@/components/FloatingContactButtons";
 import Footer from "@/components/Footer";
-import OfferPopup from "@/components/OfferPopup";
 import TawkToChat from "@/components/TawkToChat";
 import { Toaster } from "react-hot-toast";
 
@@ -18,39 +17,35 @@ const inter = Inter({
 /* ---------- Global SEO Metadata ---------- */
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.poovarislandboating.com"),
-  icons: {
-    icon: "/favicon.webp",
-  },
+
   title: {
-    default:
-      "Poovar Boating & Poovar Island Boating | Kayaloram Cruise Kerala",
-    template:
-      "%s | Poovar Boating & Poovar Island Boating – Kayaloram",
+    default: "Poovar Boating | Island & Backwater Cruise in Poovar",
+    template: "%s | Poovar Boating",
   },
 
   description:
-    "Experience Poovar boating and Poovar island boating with Kayaloram Cruise. Enjoy Kerala backwater cruises, mangrove forest boating, and golden beach tours in Poovar.",
+    "Enjoy Poovar boating, island sightseeing, mangrove forest cruise and Kerala backwater experiences with Kayaloram Cruise.",
 
   keywords: [
-    "Poovar boating",
-    "Poovar island boating",
-    "Kayaloram cruise",
-    "Kayaloram resort Poovar",
-    "Kerala backwater cruise Poovar",
-    "Golden beach Poovar",
-    "Mangrove forest boating",
-    "Poovar boating packages",
+    "poovar boating",
+    "poovar island boating",
+    "poovar backwaters",
+    "poovar boat service",
+    "poovar boating price",
   ],
 
   alternates: {
     canonical: "https://www.poovarislandboating.com",
   },
 
+  icons: {
+    icon: "/favicon.webp",
+  },
+
   openGraph: {
-    title:
-      "Poovar Boating & Poovar Island Boating | Kayaloram Cruise Kerala",
+    title: "Poovar Boating & Island Backwater Cruise",
     description:
-      "Book Poovar boating and Poovar island boating at Kayaloram. Scenic Kerala backwater cruises, mangrove forests, and golden beach experiences await.",
+      "Book Poovar boating with Kayaloram Cruise. Explore mangroves, golden beach and scenic Kerala backwaters.",
     url: "https://www.poovarislandboating.com",
     siteName: "Kayaloram Cruise Poovar",
     images: [
@@ -58,7 +53,7 @@ export const metadata: Metadata = {
         url: "/firstImage.webp",
         width: 1200,
         height: 630,
-        alt: "Poovar boating and Poovar island boating with Kayaloram Cruise",
+        alt: "Poovar boating and island backwater cruise",
       },
     ],
     locale: "en_IN",
@@ -67,10 +62,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title:
-      "Poovar Boating & Poovar Island Boating | Kayaloram Cruise",
+    title: "Poovar Boating | Island & Backwater Cruise",
     description:
-      "Explore Poovar boating, island boating, Kerala backwater cruises & golden beach tours with Kayaloram.",
+      "Explore Poovar boating, island sightseeing and Kerala backwater cruises with Kayaloram.",
     images: ["/firstImage.webp"],
   },
 };
@@ -90,32 +84,30 @@ export default function RootLayout({
   ];
 
   return (
-    <html lang="en" className={`${inter.variable} bg-emerald-950`}>
-      <body className="min-h-screen font-sans">
-        <OfferPopup />
-        <TawkToChat />
+    <html lang="en" className={inter.variable}>
+      <body className="min-h-screen bg-emerald-950 font-sans text-white">
+        <Navbar navItems={navItems} />
 
-        <div className="fixed top-0 left-0 w-full z-50">
-          <Navbar navItems={navItems} />
-        </div>
-
-        <main>
+        {/* Main Content – SEO Landmark */}
+        <main id="page-content" className="relative">
           {children}
+
           <Toaster
             position="top-center"
             toastOptions={{
               style: {
-                background: "#0f172a",
-                color: "#CDFFF5",
-                border: "1px solid #CDFFF5",
+                background: "#020617",
+                color: "#E6FFFA",
+                border: "1px solid #2DD4BF",
               },
             }}
           />
+
           <FloatingContactButtons />
+          <TawkToChat />
         </main>
 
         <Footer />
-
       </body>
     </html>
   );

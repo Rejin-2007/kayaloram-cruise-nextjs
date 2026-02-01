@@ -1,35 +1,47 @@
-import AboutInformation from '@/components/AboutInformation'
-import Enquiry from '@/components/Enquiry'
-import Reviews from '@/components/Reviews'
+import AboutInformation from "@/components/AboutInformation";
+import Enquiry from "@/components/Enquiry";
+import Reviews from "@/components/Reviews";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "About Kayaloram Resort | Poovar Island Boating & Backwater Cruise",
+/* ---------- About Page SEO Metadata ---------- */
+export const metadata: Metadata = {
+  title:
+    "About Kayaloram Resort | Poovar Boating & Poovar Island Boating",
   description:
-    "Learn more about Kayaloram Resort and Poovar Island boating services. Discover Kerala backwater cruises, golden beach tours, guest reviews, and easy booking in Poovar.",
+    "Know more about Kayaloram Resort and our trusted Poovar boating and Poovar island boating services. Explore Kerala backwater cruises, mangrove boating, golden beach sightseeing, safety standards, and booking support.",
   keywords: [
-    "Poovar boating",
-    "Poovar island boating",
-    "Kayaloram resort",
-    "Poovar backwater cruise",
-    "Poovar boat service",
-    "Poovar golden beach boating",
-    "Kerala backwater boating",
-    "Poovar boating price",
-    "Poovar tourist boating",
-    "Poovar island resort",
-    "Poovar river cruise",
-    "Trivandrum backwater boating",
-    "Poovar boating reviews",
-    "Poovar houseboat experience"
+    "about kayaloram resort",
+    "poovar boating service",
+    "poovar island boating",
+    "poovar backwaters",
+    "poovar sightseeing",
+    "poovar boat service",
+    "poovar back water cruise",
+    "poovar mangrove boating",
   ],
+  alternates: {
+    canonical: "https://www.poovarislandboating.com/about",
+  },
 };
 
-export default function page() {
+/* ---------- About Page ---------- */
+export default function AboutPage() {
   return (
-    <div>
-      <AboutInformation />
-      <Reviews />
-      <Enquiry />
-    </div>
-  )
+    <main className="w-full overflow-hidden">
+      {/* ABOUT INFORMATION */}
+      <section aria-label="About Kayaloram Resort and Poovar boating service">
+        <AboutInformation />
+      </section>
+
+      {/* CUSTOMER REVIEWS */}
+      <section aria-label="Customer reviews for Poovar boating service">
+        <Reviews />
+      </section>
+
+      {/* ENQUIRY / CTA */}
+      <section aria-label="Poovar boating enquiry and contact">
+        <Enquiry />
+      </section>
+    </main>
+  );
 }

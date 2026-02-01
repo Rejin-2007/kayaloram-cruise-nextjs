@@ -6,6 +6,9 @@ import { LazyMotion, domAnimation, m, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { FaTags } from "react-icons/fa";
 
+/* ---------- EASING (TYPED) ---------- */
+const easeOut: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
 /* ---------- Animation Variants ---------- */
 const overlayVariants: Variants = {
   hidden: { opacity: 0 },
@@ -14,13 +17,20 @@ const overlayVariants: Variants = {
 };
 
 const popupVariants: Variants = {
-  hidden: { x: -100, opacity: 0 },
+  hidden: { x: -80, opacity: 0 },
   visible: {
     x: 0,
     opacity: 1,
-    transition: { duration: 0.5 },
+    transition: {
+      duration: 0.45,
+      ease: easeOut, // ✅ FIXED
+    },
   },
-  exit: { x: -100, opacity: 0 },
+  exit: {
+    x: -80,
+    opacity: 0,
+    transition: { duration: 0.25 },
+  },
 };
 
 const iconVariants: Variants = {
@@ -47,56 +57,45 @@ export default function OfferPopup() {
       <AnimatePresence>
         {show && (
           <m.div
-            className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm z-50 overflow-x-hidden"
+            className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm z-50"
             variants={overlayVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
-            aria-hidden={!show}
           >
             <m.div
-              className="bg-emerald-950 bg-opacity-20 backdrop-blur-md rounded-lg p-6 sm:p-8 w-[90%] max-w-sm text-center relative border border-emerald-300/40 shadow-2xl"
+              className="bg-emerald-950/20 backdrop-blur-md rounded-lg p-6 w-[90%] max-w-sm text-center relative border border-emerald-300/40 shadow-2xl"
               variants={popupVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
               role="dialog"
               aria-modal="true"
-              aria-label="Special Poovar boating and Poovar island boating discount offer"
             >
-              {/* Close Button */}
               <button
                 onClick={() => setShow(false)}
-                className="absolute top-2 right-2 text-white text-2xl font-bold hover:text-emerald-300 transition"
-                aria-label="Close Poovar boating offer popup"
-                type="button"
+                className="absolute top-2 right-2 text-white text-2xl hover:text-emerald-300"
+                aria-label="Close offer popup"
               >
                 &times;
               </button>
 
-              {/* Offer Icon */}
               <m.div
                 className="flex justify-center mb-3 text-emerald-300 text-3xl"
                 variants={iconVariants}
                 initial="hidden"
                 animate="visible"
-                aria-hidden="true"
               >
                 <FaTags />
               </m.div>
 
-              {/* Offer Content */}
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+              <h2 className="text-2xl font-bold text-white mb-4">
                 50% OFF Poovar Boating
               </h2>
 
-              <p className="text-white mb-6 text-sm sm:text-base">
-                Enjoy an exclusive <strong>Poovar boating offer</strong> with up
-                to <strong>50% discount</strong> on Poovar island boating
-                packages.
-                <br />
-                Discover Kerala backwater cruises, mangrove views, and golden
-                beach experiences with Kayaloram Cruise.
+              <p className="text-white mb-6 text-sm">
+                Enjoy up to <strong>50% discount</strong> on Poovar island boating
+                packages with Kayaloram Cruise.
               </p>
 
               <button
@@ -104,9 +103,7 @@ export default function OfferPopup() {
                   router.push("/service");
                   setShow(false);
                 }}
-                className="px-5 py-2 bg-emerald-950 border border-white bg-opacity-30 text-white rounded hover:bg-opacity-50 transition text-sm sm:text-base font-semibold shadow"
-                aria-label="Book Poovar boating and Poovar island boating now"
-                type="button"
+                className="px-5 py-2 bg-emerald-950/40 border border-white text-white rounded hover:bg-emerald-950/60 transition font-semibold"
               >
                 Book Now
               </button>

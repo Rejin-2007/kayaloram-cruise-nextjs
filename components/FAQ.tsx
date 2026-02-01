@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 
-const accordionData = [
+/* ---------- FAQ DATA ---------- */
+const faqData = [
   {
     question: "What time does Poovar boating start?",
     answer:
@@ -11,32 +12,32 @@ const accordionData = [
   {
     question: "Which is the best time for Poovar island boating?",
     answer:
-      "The best time for Poovar island boating is in the morning. Early hours offer pleasant weather, calm waters, and beautiful sunrise views over the Poovar backwaters.",
+      "The best time for Poovar island boating is early morning. Pleasant weather, calm waters, and beautiful sunrise views make morning Poovar boating the most preferred choice.",
   },
   {
     question: "Are boats shared or exclusive for Poovar boating?",
     answer:
-      "Every Poovar boating booking provides a separate boat for your group. Enjoy exclusive Poovar island boating without sharing your boat with others.",
+      "Every Poovar boating booking provides an exclusive boat for your group. You can enjoy private Poovar island boating without sharing your boat with others.",
   },
   {
     question: "Are Poovar boating services government approved?",
     answer:
-      "Yes, Poovar boating and Poovar island boating services are fully recognized and approved by the Kerala government, ensuring safety and reliability.",
+      "Yes, Poovar boating and Poovar island boating services are officially approved by the Kerala government, ensuring safety, legality, and reliability.",
   },
   {
-    question: "Are boats certified, insured, and maintained for Poovar island boating?",
+    question: "Are boats certified and insured for Poovar island boating?",
     answer:
-      "Absolutely! Poovar boating boats are certified, insured, and regularly fitness-checked. Your Poovar island boating experience is safe and worry-free.",
+      "Absolutely. All Poovar boating boats are certified, insured, and regularly fitness-checked to ensure a safe Poovar island boating experience.",
   },
   {
     question: "Do Poovar boating boats have rooftops?",
     answer:
-      "Yes, our Poovar boating and Poovar island boating trips use comfortable rooftop boats, offering shade and panoramic views of Kerala backwaters.",
+      "Yes, Poovar boating trips use comfortable rooftop boats that provide shade and offer panoramic views of Kerala backwaters.",
   },
   {
-    question: "What type of boat is provided for Poovar island boating?",
+    question: "What type of boat is used for Poovar island boating?",
     answer:
-      "We provide modern fiber motor boats for Poovar boating and Poovar island boating, designed for smooth navigation and fully equipped for your safety.",
+      "Modern fiber motor boats are used for Poovar boating and Poovar island boating, designed for smooth navigation and equipped with all safety measures.",
   },
 ];
 
@@ -45,17 +46,17 @@ export default function FAQ() {
 
   return (
     <section
-      className="max-w-2xl mx-auto mt-16 px-4"
+      className="mx-auto mt-20 max-w-3xl px-4"
       aria-labelledby="faq-heading"
     >
-      {/* SEO: FAQ Schema */}
+      {/* ---------- FAQ SCHEMA (SEO) ---------- */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: accordionData.map((item) => ({
+            mainEntity: faqData.map((item) => ({
               "@type": "Question",
               name: item.question,
               acceptedAnswer: {
@@ -67,59 +68,55 @@ export default function FAQ() {
         }}
       />
 
-      <div className="rounded-3xl backdrop-blur-md bg-emerald-400/20 border border-emerald-400/30 shadow-xl p-6">
+      <div className="rounded-3xl border border-emerald-300/30 bg-emerald-400/20 p-6 shadow-xl backdrop-blur-md">
+        {/* H2 for SEO */}
         <h2
           id="faq-heading"
-          className="text-center text-2xl md:text-3xl font-bold text-emerald-600 mb-8"
+          className="mb-10 text-center text-2xl font-extrabold text-emerald-300 md:text-3xl"
         >
           Frequently Asked Questions – Poovar Boating & Poovar Island Tours
         </h2>
 
         <div className="flex flex-col gap-4">
-          {accordionData.map((item, idx) => {
-            const isOpen = openIndex === idx;
+          {faqData.map((item, index) => {
+            const isOpen = openIndex === index;
 
             return (
-              <div
-                key={idx}
-                className={`rounded-2xl bg-white/10 border border-emerald-300/20 transition-all ${
+              <article
+                key={index}
+                className={`rounded-2xl border border-emerald-300 bg-white/10 transition ${
                   isOpen ? "ring-2 ring-emerald-300" : ""
                 }`}
               >
                 <button
-                  className="w-full px-5 py-4 flex justify-between items-center text-left text-emerald-200 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 rounded-2xl"
-                  onClick={() => setOpenIndex(isOpen ? null : idx)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      setOpenIndex(isOpen ? null : idx);
-                    }
-                  }}
+                  className="flex w-full items-center justify-between rounded-2xl px-5 py-4 text-left font-medium text-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
                   aria-expanded={isOpen}
-                  aria-controls={`faq-answer-${idx}`}
+                  aria-controls={`faq-panel-${index}`}
                 >
                   <span>{item.question}</span>
                   <span
-                    className="text-2xl text-emerald-400 font-bold ml-3 select-none"
-                    aria-hidden="true"
+                    className="ml-3 select-none text-2xl font-bold text-emerald-300"
+                    aria-hidden
                   >
                     {isOpen ? "−" : "+"}
                   </span>
                 </button>
 
                 <div
-                  id={`faq-answer-${idx}`}
-                  className={`px-5 overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out ${
+                  id={`faq-panel-${index}`}
+                  className={`overflow-hidden px-5 transition-[max-height,opacity] duration-500 ease-in-out ${
                     isOpen
-                      ? "max-h-[500px] opacity-100 pb-4"
+                      ? "max-h-100 pb-4 opacity-100"
                       : "max-h-0 opacity-0"
                   }`}
                   aria-hidden={!isOpen}
                 >
-                  <p className="text-emerald-300 text-base leading-relaxed">
+                  <p className="text-base leading-relaxed text-emerald-300">
                     {item.answer}
                   </p>
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>

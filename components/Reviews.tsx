@@ -12,7 +12,7 @@ const reviews = [
       "Very good experience.. we are so happy with the lovely host Rajesh boat driving and explain the same... I will give 5 star Thanks Kayaloram Backwater",
     user: {
       name: "DARKVILLER GAMING",
-      avatar: "https://randomuser.me/api/portraits/men/1.webp",
+      avatar: "https://i.pravatar.cc/150?img=12",
     },
   },
   {
@@ -21,7 +21,7 @@ const reviews = [
       "It was an amazing experience for me and my friends... Would strongly recommend this cruise.",
     user: {
       name: "GAYATRI VAGAL",
-      avatar: "https://randomuser.me/api/portraits/women/2.webp",
+      avatar: "https://i.pravatar.cc/150?img=32",
     },
   },
   {
@@ -30,7 +30,7 @@ const reviews = [
       "We went for boating from Kayaloram resort... clean and less crowded beach.",
     user: {
       name: "NEETING BABY",
-      avatar: "https://randomuser.me/api/portraits/women/3.webp",
+      avatar: "https://i.pravatar.cc/150?img=47",
     },
   },
   {
@@ -39,7 +39,7 @@ const reviews = [
       "Kayaloram boating experience is too good! Must visit this place with your loved ones.",
     user: {
       name: "JEYBN 4",
-      avatar: "https://randomuser.me/api/portraits/men/4.webp",
+      avatar: "https://i.pravatar.cc/150?img=68",
     },
   },
 ];
@@ -89,12 +89,12 @@ export default function Reviews() {
         aria-labelledby="reviews-heading"
       >
         <div className="mx-auto max-w-6xl">
-          <h1
+          <h2
             id="reviews-heading"
             className="mb-4 text-center text-4xl font-bold text-emerald-100 md:text-5xl"
           >
             Poovar Boating & Poovar Island Boating Guest Reviews
-          </h1>
+          </h2>
 
           <p className="mx-auto mb-12 max-w-3xl text-center text-emerald-200">
             Real guest experiences from Poovar boating, island boating,
@@ -110,7 +110,7 @@ export default function Reviews() {
                 initial="hidden"
                 whileInView="visible"
                 whileHover="hover"
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-100px" }}
               >
                 <StarDisplay stars={review.stars} />
 
@@ -119,13 +119,17 @@ export default function Reviews() {
                 </blockquote>
 
                 <footer className="mt-6 flex items-center gap-3">
+                  {/* Avatar (NORMAL IMG — SAFE) */}
                   <img
                     src={review.user.avatar}
                     alt={`Avatar of ${review.user.name}`}
+                    width={44}
+                    height={44}
                     className="h-11 w-11 rounded-full border-2 border-emerald-300"
                     loading="lazy"
                     decoding="async"
                   />
+
                   <span className="font-semibold text-emerald-200">
                     {review.user.name}
                   </span>

@@ -10,19 +10,19 @@ const yachtData = [
     image: '/estuary.webp',
     title: 'Poovar Estuary',
     description:
-      'Experience the stunning Poovar Estuary where the Neyyar River meets the Arabian Sea. A highlight of Poovar boating and Poovar island boating, ideal for Kerala backwater cruises, kayaking, bird watching, and nature photography.',
+      'Experience the stunning Poovar Estuary where the Neyyar River meets the Arabian Sea. A highlight of Poovar boating and Poovar island boating, ideal for Kerala backwater cruises, bird watching, photography, and peaceful sightseeing.',
   },
   {
     image: '/marymatha.webp',
     title: 'Mary Matha Statue Poovar',
     description:
-      'The famous Mary Matha Statue near Poovar Island Beach is a spiritual and scenic landmark included in many Poovar boating and Poovar sightseeing tours through Kerala backwaters.',
+      'The iconic Mary Matha Statue near Poovar Island Beach is a spiritual and scenic landmark included in popular Poovar boating and Poovar sightseeing tours through Kerala backwaters.',
   },
   {
     image: '/elephant-rock-island.webp',
     title: 'Elephant Rock Island Poovar',
     description:
-      'Elephant Rock Island is one of Poovar’s hidden gems, popular for Poovar island boating, calm backwater cruises, photography, and peaceful exploration of Kerala’s untouched waterways.',
+      'Elephant Rock Island is one of Poovar’s hidden gems, loved for Poovar island boating, calm backwater cruises, photography, and exploring Kerala’s untouched waterways.',
   },
 ];
 
@@ -34,9 +34,9 @@ export default function ExplorationViews() {
   const [isPaused, setIsPaused] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const currentYacht = yachtData[currentIndex];
+  const currentView = yachtData[currentIndex];
 
-  /* Auto slide – paused on hover / modal */
+  /* Auto slide */
   useEffect(() => {
     if (isPaused || modalOpen) return;
     const timer = setInterval(
@@ -46,28 +46,12 @@ export default function ExplorationViews() {
     return () => clearInterval(timer);
   }, [isPaused, modalOpen]);
 
-  /* Focus trap + ESC */
+  /* ESC + focus trap */
   useEffect(() => {
     if (!modalOpen) return;
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setModalOpen(false);
-
-      if (e.key === 'Tab' && modalRef.current) {
-        const focusable = modalRef.current.querySelectorAll<HTMLElement>(
-          'button,[tabindex]:not([tabindex="-1"])'
-        );
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
-
-        if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        } else if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        }
-      }
     };
 
     document.addEventListener('keydown', onKey);
@@ -86,129 +70,123 @@ export default function ExplorationViews() {
   return (
     <LazyMotion features={domAnimation}>
       <section
-        className="flex w-full flex-col items-center overflow-hidden bg-emerald-950 px-4 py-12 text-white"
-        aria-labelledby="explorations-heading"
+        className="w-full bg-emerald-950 px-4 py-14 text-white"
+        aria-labelledby="poovar-exploration-heading"
       >
+        {/* Header */}
         <header className="mb-10 text-center">
-          <h2 id="explorations-heading" className="text-4xl font-bold">
+          <h2
+            id="poovar-exploration-heading"
+            className="text-3xl md:text-4xl font-extrabold"
+          >
             Poovar Boating & Poovar Island Backwater Explorations
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-lime-200">
-            Explore Poovar boating routes, Poovar island boating experiences, and Kerala
-            backwater cruise destinations near Trivandrum. Discover serene estuaries,
-            island landmarks, mangroves, and scenic boat ride locations.
+            Explore Poovar boating routes, island boating experiences, mangrove
+            backwaters, scenic estuaries, and Kerala backwater cruise destinations
+            near Trivandrum.
           </p>
         </header>
 
+        {/* Slider */}
         <div
-          className="relative w-full max-w-5xl"
+          className="relative mx-auto max-w-5xl"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <figure
-            className="group relative cursor-pointer overflow-hidden rounded-2xl shadow-2xl"
-            aria-label={`Poovar boating view: ${currentYacht.title}`}
-          >
-            <m.div whileHover={{ scale: 1.04 }}>
-              <Image
-                src={currentYacht.image}
-                alt={`${currentYacht.title} – Poovar boating, Poovar island boating and Kerala backwater cruise destination`}
-                width={1280}
-                height={720}
-                className="h-85 w-full rounded-2xl object-cover transition duration-500 group-hover:scale-105 group-hover:brightness-110"
-                loading="lazy"
-                onClick={() => setModalOpen(true)}
-                role="button"
-                tabIndex={0}
-              />
-            </m.div>
+          <figure className="relative overflow-hidden rounded-2xl shadow-2xl">
+            <Image
+              src={currentView.image}
+              alt={`${currentView.title} – Poovar boating and Kerala backwater cruise location`}
+              width={1280}
+              height={720}
+              loading="lazy"
+              className="h-88 md:h-104 w-full object-cover cursor-pointer"
+              onClick={() => setModalOpen(true)}
+            />
 
             <button
               onClick={prev}
               aria-label="Previous Poovar boating location"
-              className="absolute left-4 top-4 rounded-full bg-white/30 p-2 shadow-lg backdrop-blur-md hover:bg-white/60"
+              className="absolute left-4 top-4 rounded-full bg-white/40 p-2 backdrop-blur hover:bg-white/70"
             >
-              <FaArrowLeft className="text-xl text-green-900" aria-hidden />
+              <FaArrowLeft className="text-green-900" />
             </button>
 
             <button
               onClick={next}
               aria-label="Next Poovar boating location"
-              className="absolute right-4 top-4 rounded-full bg-white/30 p-2 shadow-lg backdrop-blur-md hover:bg-white/60"
+              className="absolute right-4 top-4 rounded-full bg-white/40 p-2 backdrop-blur hover:bg-white/70"
             >
-              <FaArrowRight className="text-xl text-green-900" aria-hidden />
+              <FaArrowRight className="text-green-900" />
             </button>
           </figure>
 
+          {/* Dots */}
           <div className="mt-4 flex justify-center gap-2">
             {yachtData.map((item, idx) => (
               <button
                 key={item.title}
                 onClick={() => setCurrentIndex(idx)}
-                aria-label={`View ${item.title} Poovar boating spot`}
-                className={`h-3 w-3 rounded-full transition-all ${
-                  idx === currentIndex ? 'scale-110 bg-lime-400' : 'bg-white/30'
+                aria-label={`View ${item.title}`}
+                className={`h-3 w-3 rounded-full ${
+                  idx === currentIndex ? 'bg-lime-400 scale-110' : 'bg-white/30'
                 }`}
               />
             ))}
           </div>
 
+          {/* Text */}
           <m.div
-            className="mt-6 rounded-xl border border-lime-200/30 bg-white/20 p-6 shadow-xl backdrop-blur-xl"
+            className="mt-6 rounded-xl border border-lime-200/30 bg-white/20 p-6 backdrop-blur"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
+            transition={{ duration: 0.6 }}
           >
             <h3 className="mb-2 text-2xl font-bold text-lime-100">
-              {currentYacht.title}
+              {currentView.title}
             </h3>
-            <p className="text-lime-200/90">{currentYacht.description}</p>
+            <p className="text-lime-200">{currentView.description}</p>
           </m.div>
         </div>
 
+        {/* Modal */}
         <AnimatePresence>
           {modalOpen && (
             <m.div
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               role="dialog"
               aria-modal="true"
             >
-              <m.div
-                ref={modalRef}
-                className="relative w-full max-w-5xl px-4"
-                initial={{ scale: 0.85 }}
-                animate={{ scale: 1 }}
-                exit={{ scale: 0.85 }}
-                tabIndex={-1}
-              >
+              <div ref={modalRef} className="relative max-w-5xl px-4">
                 <Image
-                  src={currentYacht.image}
-                  alt={`${currentYacht.title} – Poovar boating and Kerala backwater cruise location`}
+                  src={currentView.image}
+                  alt={`${currentView.title} large view`}
                   width={1600}
                   height={900}
-                  className="max-h-[80vh] w-full rounded-xl object-contain shadow-2xl"
+                  className="max-h-[80vh] w-full rounded-xl object-contain"
                 />
                 <button
                   onClick={() => setModalOpen(false)}
-                  aria-label="Close image preview"
+                  aria-label="Close image"
                   className="absolute right-4 top-4 rounded-full bg-white/20 p-2 text-white hover:bg-white/40"
-                  autoFocus
                 >
-                  <FaTimes className="text-2xl" aria-hidden />
+                  <FaTimes className="text-xl" />
                 </button>
-              </m.div>
+              </div>
             </m.div>
           )}
         </AnimatePresence>
 
-        <p className="mt-6 max-w-3xl text-center text-lime-300">
-          <strong>Hidden Poovar Backwater Spots:</strong> Discover peaceful viewpoints,
-          island routes, and scenic corners perfect for Poovar boating, Poovar island
-          boating, Kerala backwater cruises, photography, and relaxation.
+        {/* Footer text */}
+        <p className="mt-8 text-center text-lime-300 max-w-3xl mx-auto">
+          Discover hidden Poovar backwater spots perfect for Poovar boating,
+          Poovar island boating, Kerala backwater cruises, sightseeing,
+          photography, and peaceful relaxation.
         </p>
       </section>
     </LazyMotion>

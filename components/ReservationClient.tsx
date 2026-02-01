@@ -6,15 +6,18 @@ import { FaPhoneAlt, FaCalendarAlt, FaShip, FaUser } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";
 
-/* Packages from cards */
+/* ---------- Packages ---------- */
 const cards = [
-  { title: "Sunrise Cruise", },
-  { title: "Sunset Cruise", },
-  { title: "Lunch Cruise", },
-  { title: "Standard Cruise", },
-  { title: "Deluxe Cruise", },
-  { title: "Premium Cruise", },
+  { title: "Sunrise Cruise" },
+  { title: "Sunset Cruise" },
+  { title: "Lunch Cruise" },
+  { title: "Standard Cruise" },
+  { title: "Deluxe Cruise" },
+  { title: "Premium Cruise" },
 ];
+
+/* ---------- Typed Easing (TS safe) ---------- */
+const easeOut: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export default function ReservationClient() {
   const [name, setName] = useState("");
@@ -23,54 +26,31 @@ export default function ReservationClient() {
   const [packageName, setPackageName] = useState(cards[0].title);
   const [loading, setLoading] = useState(false);
 
-  const handlePayment = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const res = await fetch("/api/phonepe/pay", {
-        method: "POST",
-      });
-
-      const result = await res.json();
-
-      if (!result.success || !result.redirectUrl) {
-        throw new Error("Payment init failed");
-      }
-
-      // 🔥 Redirect to PhonePe hosted page
-      window.location.href = result.redirectUrl;
-
-    } catch (err) {
-      console.error("❌ PAYMENT ERROR:", err);
-      alert("Unable to start payment");
-    }
-  };
+  /* ---------- Submit (Email Only) ---------- */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     const templateParams = {
-      subject: "🚤 New Boating Enquiry Received",
+      subject: "🚤 New Poovar Boating Enquiry",
       customer_name: name,
       customer_phone: phone,
       ride_date: date,
       package_name: packageName,
       message: `
-New boating enquiry details:
+New Poovar boating enquiry received:
 
 👤 Name: ${name}
 📞 Phone: ${phone}
 📅 Ride Date: ${date}
 📦 Package: ${packageName}
-
-Please contact the customer as soon as possible.
-    `,
+      `,
     };
 
     try {
       await emailjs.send(
-        "service_smh1c0p",      // EmailJS Service ID
-        "template_22f9sbp",     // EmailJS Template ID
+        "service_smh1c0p",      // Service ID
+        "template_22f9sbp",     // Template ID
         templateParams,
         "M40cSVMnA_AywFy2-"     // Public Key
       );
@@ -82,7 +62,6 @@ Please contact the customer as soon as possible.
       setPhone("");
       setDate("");
       setPackageName(cards[0].title);
-
     } catch (error) {
       console.error("EmailJS Error:", error);
       toast.error("Failed to send enquiry. Please try again.");
@@ -91,20 +70,17 @@ Please contact the customer as soon as possible.
     }
   };
 
-
   const inputClass =
     "w-full mt-2 p-2 rounded-lg text-black bg-white " +
-    "border border-[#CDFFF5]/60 " +
-    " " +
-    "focus:outline-none focus:ring-2 focus:ring-[#CDFFF5]/50";
+    "border border-[#CDFFF5]/60 focus:outline-none focus:ring-2 focus:ring-[#CDFFF5]/50";
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-emerald-950 px-4">
       <motion.form
-        onSubmit={handlePayment}
+        onSubmit={handleSubmit}
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: easeOut }}
         className="bg-white/10 backdrop-blur-md border border-emerald-400/30 p-8 rounded-3xl shadow-lg w-full max-w-md text-white"
         aria-label="Poovar boating reservation form"
       >
@@ -182,7 +158,7 @@ Please contact the customer as soon as possible.
           disabled={loading}
           className="w-full bg-green-400 hover:bg-green-500 text-green-900 font-semibold px-4 py-3 rounded-full shadow-lg transition-colors text-lg"
         >
-          {loading ? "Submitting..." : "Send Booking Request"}
+          {loading ? "Sending..." : "Send Booking Request"}
         </motion.button>
       </motion.form>
     </div>

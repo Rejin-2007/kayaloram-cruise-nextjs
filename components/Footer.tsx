@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { HiPhone } from "react-icons/hi";
 import { SiGmail } from "react-icons/si";
@@ -30,17 +29,15 @@ export default function Footer() {
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3099.6679861468047!2d77.08617065259043!3d8.311056629233937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05a99c11a043a7%3A0x8984b4fe9e723ef!2skayaloram%20resort!5e1!3m2!1sen!2sin!4v1750411038045!5m2!1sen!2sin"
           width="100%"
           height="420"
-          style={{ border: 0 }}
-          allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title="Kayaloram Resort Google Maps Location"
+          title="Kayaloram Resort Poovar Location Map"
           className="border-b border-emerald-400/10"
         />
       </div>
 
       {/* MAIN FOOTER */}
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-16 md:grid-cols-4">
         {/* Brand */}
         <div className="space-y-4">
           <Image
@@ -56,17 +53,15 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Footer Navigation */}
+        {/* Navigation */}
         <nav aria-label="Footer Navigation">
-          <h3 className="text-lime-300 font-semibold mb-4">
-            Quick Links
-          </h3>
+          <h3 className="mb-4 font-semibold text-lime-300">Quick Links</h3>
           <ul className="space-y-3 text-sm">
             {footerNav.map((item) => (
               <li key={item.name}>
                 <Link
                   href={item.path}
-                  className="hover:text-lime-300 transition-colors"
+                  className="transition-colors hover:text-lime-300"
                 >
                   {item.name}
                 </Link>
@@ -77,9 +72,9 @@ export default function Footer() {
 
         {/* Contact */}
         <div className="space-y-4 text-sm">
-          <h3 className="text-lime-300 font-semibold">Contact</h3>
+          <h3 className="font-semibold text-lime-300">Contact</h3>
 
-          <div className="flex items-start gap-3">
+          <div className="flex gap-3">
             <SiGmail className="mt-1 text-lime-300" />
             <a
               href="mailto:rajeshkayaloram@gmail.com"
@@ -89,9 +84,9 @@ export default function Footer() {
             </a>
           </div>
 
-          <div className="flex items-start gap-3">
+          <div className="flex gap-3">
             <HiPhone className="mt-1 text-lime-300" />
-            <div className="space-y-1">
+            <div>
               <a href="tel:+918139031924" className="block hover:underline">
                 +91 81390 31924
               </a>
@@ -104,8 +99,8 @@ export default function Footer() {
 
         {/* Location */}
         <div className="space-y-4 text-sm">
-          <h3 className="text-lime-300 font-semibold">Location</h3>
-          <div className="flex items-start gap-3">
+          <h3 className="font-semibold text-lime-300">Location</h3>
+          <div className="flex gap-3">
             <SlLocationPin className="mt-1 text-lime-300" />
             <address className="not-italic leading-relaxed">
               Kayaloram Resort <br />
@@ -118,42 +113,42 @@ export default function Footer() {
 
       {/* BOTTOM BAR */}
       <div className="border-t border-emerald-400/10 py-8">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Social */}
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 md:flex-row">
+          {/* Social Links */}
           <div className="flex gap-6">
-            {[
-              {
-                Icon: FaInstagram,
-                href: "https://www.instagram.com/poovar.boating",
-                label: "Poovar Boating Instagram",
-              },
-              {
-                Icon: FaYoutube,
-                href: "https://www.youtube.com/@rajeshmathias6014",
-                label: "Poovar Boating YouTube",
-              },
-              {
-                Icon: FaFacebook,
-                href: "https://www.facebook.com/share/1YPM77byhM/",
-                label: "Poovar Boating Facebook",
-              },
-            ].map(({ Icon, href, label }) => (
-              <motion.a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                aria-label={label}
-                whileHover={{ scale: 1.15 }}
-                className="text-2xl text-lime-300 hover:text-lime-400 transition-colors"
-              >
-                <Icon />
-              </motion.a>
-            ))}
+            <a
+              href="https://www.instagram.com/poovar.boating"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              aria-label="Poovar Boating Instagram"
+              className="text-2xl text-lime-300 transition-colors hover:text-lime-400"
+            >
+              <FaInstagram />
+            </a>
+
+            <a
+              href="https://www.youtube.com/@rajeshmathias6014"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              aria-label="Poovar Boating YouTube"
+              className="text-2xl text-lime-300 transition-colors hover:text-lime-400"
+            >
+              <FaYoutube />
+            </a>
+
+            <a
+              href="https://www.facebook.com/share/1YPM77byhM/"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              aria-label="Poovar Boating Facebook"
+              className="text-2xl text-lime-300 transition-colors hover:text-lime-400"
+            >
+              <FaFacebook />
+            </a>
           </div>
 
-          {/* Credit + Copyright */}
-          <div className="text-center text-xs text-lime-200/70 space-y-1">
+          {/* Credit */}
+          <div className="space-y-1 text-center text-xs text-lime-200/70">
             <p>
               Designed & Developed by{" "}
               <a
@@ -166,7 +161,8 @@ export default function Footer() {
               </a>
             </p>
             <p>
-              © {new Date().getFullYear()} Kayaloram Resort · Poovar Boating · All rights reserved
+              © {new Date().getFullYear()} Kayaloram Resort · Poovar Boating · All
+              rights reserved
             </p>
           </div>
         </div>

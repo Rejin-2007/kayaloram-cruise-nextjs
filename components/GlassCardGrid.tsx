@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa";
 
-/* ---------- Cards Data ---------- */
+/* ---------- Poovar Boating Packages ---------- */
 const cards = [
   { title: "Sunrise Cruise", img: "/sunrise.webp" },
   { title: "Sunset Cruise", img: "/sunset.webp" },
@@ -14,42 +14,45 @@ const cards = [
 export default function GlassCardGrid() {
   return (
     <section
-      className="min-h-screen flex items-center justify-center bg-emerald-950 py-12"
-      aria-label="Poovar boating and Poovar island boating packages"
+      className="flex min-h-screen items-center justify-center bg-emerald-950 py-14"
+      aria-label="Poovar boating packages and Poovar island boating services"
     >
-      <div className="w-full max-w-6xl px-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-        {cards.map((c, i) => (
+      <div className="grid w-full max-w-6xl grid-cols-1 gap-8 px-4 md:grid-cols-2 xl:grid-cols-3">
+        {cards.map((card, index) => (
           <article
-            key={i}
-            className="relative flex flex-col bg-white/10 border border-white/10 rounded-2xl shadow-xl overflow-hidden backdrop-blur transition hover:scale-[1.03]"
+            key={card.title}
+            className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/10 shadow-xl backdrop-blur transition-transform duration-300 hover:scale-[1.03]"
           >
+            {/* Image */}
             <div className="relative h-56 w-full">
               <Image
-                src={c.img}
-                alt={`${c.title} Poovar boating package`}
+                src={card.img}
+                alt={`${card.title} – Poovar boating and Kerala backwater cruise`}
                 fill
-                priority={i < 2}
-                sizes="(max-width: 768px) 100vw, 33vw"
+                priority={index === 0}
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                 className="object-cover"
               />
             </div>
 
-            <div className="p-6 flex flex-col gap-4">
-              <h3 className="text-white text-xl font-bold">{c.title}</h3>
+            {/* Content */}
+            <div className="flex flex-col gap-4 p-6">
+              <h3 className="text-xl font-bold text-white">
+                {card.title}
+              </h3>
 
               <a
                 href={`https://wa.me/918139031924?text=Interested%20in%20${encodeURIComponent(
-                  c.title
+                  card.title
                 )}%20Poovar%20boating`}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-green-300 font-semibold animate-pulse"
-                aria-label={`WhatsApp enquiry for ${c.title} Poovar boating`}
+                rel="noopener noreferrer nofollow"
+                aria-label={`WhatsApp enquiry for ${card.title} Poovar boating package`}
+                className="inline-flex items-center gap-2 font-semibold text-green-300 transition-colors hover:text-green-400"
               >
                 <FaWhatsapp className="text-xl" />
                 WhatsApp Enquiry
               </a>
-
             </div>
           </article>
         ))}
