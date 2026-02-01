@@ -157,7 +157,7 @@ export default function Footer() {
             <p>
               Designed & Developed by{" "}
               <a
-                href="https://www.instagram.com/browess"
+                href="https://www.instagram.com/browzess"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="text-lime-300 hover:underline"
