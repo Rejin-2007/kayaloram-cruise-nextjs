@@ -1,121 +1,85 @@
-'use client';
+/* ---------- BLOG CONTENT DATA ---------- */
+const blogContent = {
+  heading: "Poovar Boating Blog & Travel Guide",
+  intro:
+    "Welcome to the Poovar Boating Blog — your trusted source for news, tips, stories, and guides related to Poovar island boating, Kerala backwater cruises, and golden beach experiences near Kayaloram Resort.",
 
-import { useRouter } from 'next/navigation';
-import { LazyMotion, domAnimation, m } from 'framer-motion';
-import { FaArrowRight } from 'react-icons/fa';
-import { FaSailboat } from 'react-icons/fa6';
+  sections: [
+    {
+      title: "Why Poovar Island Boating Is a Must-Visit Experience",
+      content:
+        "Poovar Island is a rare destination where river, sea, lake, and golden sand meet naturally. Boating in Poovar offers calm backwaters, mangrove forests, floating cottages, and peaceful scenery guided by experienced local boat operators.",
+    },
+    {
+      title: "Different Types of Boating in Poovar",
+      content:
+        "Visitors can enjoy sunrise boating, sunset cruises, river cruises, golden beach boating, island hopping, and private boat services. Each boating experience provides a unique view of Poovar’s untouched natural beauty.",
+    },
+    {
+      title: "Best Time to Visit Poovar for Boating",
+      content:
+        "The best time for Poovar boating is from October to March, when the climate is pleasant and water conditions are ideal. Early morning and sunset boat rides are the most popular due to cooler weather and scenic lighting.",
+    },
+    {
+      title: "Is Poovar Boating Safe for Tourists?",
+      content:
+        "Poovar boating is safe when operated by licensed and experienced local boatmen. Life jackets are provided, boats are well maintained, and routes are carefully chosen to ensure a safe and enjoyable experience for all visitors.",
+    },
+    {
+      title: "Poovar Boating Near Kayaloram Resort",
+      content:
+        "Kayaloram Resort offers easy access to Poovar boating services, allowing guests to enjoy river cruises, backwater boating, and golden beach trips with professional guidance and comfortable arrangements.",
+    },
+  ],
 
-const blogJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
-  headline: 'Poovar Boating Services: Complete Guide to Kerala Backwaters',
-  description:
-    'Complete guide to Poovar boating, Poovar island boating, Poovar backwater cruise, boating prices, packages, and eco tourism activities in Poovar, Kerala.',
-  author: { '@type': 'Person', name: 'Pankaj' },
-  datePublished: '2025-08-27',
-  mainEntityOfPage: {
-    '@type': 'WebPage',
-    '@id': 'https://www.poovarislandboating.com/blog',
-  },
-  image: 'https://www.poovarislandboating.com/gallery',
+  links: [
+    { label: "Book Poovar Boating", href: "/reservation" },
+    { label: "View Boating Packages", href: "/service" },
+  ],
 };
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0 },
-};
-
+/* ---------- BLOG COMPONENT (SERVER) ---------- */
 export default function Blog() {
-  const router = useRouter();
-
   return (
-    <LazyMotion features={domAnimation}>
-      <main role="main">
-        {/* JSON-LD Structured Data (unchanged, non-render blocking) */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
-        />
+    <section className="bg-emerald-950 text-white py-20 px-4">
+      {/* Centered Container */}
+      <div className="mx-auto max-w-4xl text-center">
+        {/* H1 */}
+        <h1 className="text-4xl font-extrabold tracking-tight mb-6">
+          {blogContent.heading}
+        </h1>
 
-        <article
-          className="mx-auto mt-8 max-w-4xl bg-emerald-950 px-6 py-10 leading-relaxed text-white"
-          itemScope
-          itemType="https://schema.org/BlogPosting"
-          aria-label="Poovar Boating and Poovar Island Boating Blog Guide"
-        >
-          <h1 className="mb-2 text-3xl font-extrabold" itemProp="headline">
-            Poovar Boating & Poovar Island Boating Services: Complete Guide to Kerala
-            Backwaters
-          </h1>
+        {/* Intro */}
+        <p className="mx-auto max-w-2xl text-lg text-gray-300 mb-16">
+          {blogContent.intro}
+        </p>
+      </div>
 
-          <m.p
-            className="mb-6 flex items-center gap-2 text-sm text-gray-400"
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
+      {/* Blog Sections */}
+      <div className="mx-auto max-w-3xl space-y-12 px-2">
+        {blogContent.sections.map((section, index) => (
+          <article
+            key={index}
+            className="border border-emerald-400/20 rounded-2xl p-6 bg-white/5"
           >
-            <FaSailboat
-              className="text-emerald-400"
-              aria-hidden="true"
-              focusable="false"
-            />
-            Leave a Comment / Uncategorized / By{' '}
-            <span itemProp="author">Pankaj</span>
-          </m.p>
-
-          <m.section
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
-          >
-            <p className="mb-4">
-              <strong>Poovar boating</strong> and{' '}
-              <strong>Poovar island boating</strong> are among the most popular
-              backwater tourism experiences in Kerala. Located near Trivandrum,
-              Poovar offers serene boat rides through calm backwaters, dense
-              mangrove forests, and the iconic golden beach where river meets sea.
+            <h2 className="text-2xl font-semibold mb-3 text-emerald-300">
+              {section.title}
+            </h2>
+            <p className="text-gray-200 leading-relaxed">
+              {section.content}
             </p>
+          </article>
+        ))}
+      </div>
 
-            <p className="mb-4">
-              A <strong>Poovar backwater cruise</strong> typically includes scenic
-              island views, estuary boating, bird watching, and guided narration
-              by experienced local operators. Travelers frequently look for
-              details such as <strong>Poovar boating price</strong>, available
-              packages, boating timings, and the best season to visit Poovar.
-            </p>
-
-            <p className="mb-4">
-              From short island rides to extended Kerala backwater cruises, Poovar
-              island boating is known for its safety standards, affordable pricing,
-              and eco-friendly practices. These sustainable boating experiences
-              make Poovar an ideal destination for families, couples, and nature
-              enthusiasts seeking a peaceful escape.
-            </p>
-          </m.section>
-
-          <m.div
-            className="mt-10 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <button
-              type="button"
-              onClick={() => router.push('/')}
-              className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition hover:scale-105 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-              aria-label="Go back to Poovar Boating homepage"
-            >
-              Go to Homepage
-              <FaArrowRight aria-hidden="true" focusable="false" />
-            </button>
-          </m.div>
-        </article>
-      </main>
-    </LazyMotion>
+      {/* Internal Links */}
+      <nav className="mt-16 flex flex-wrap justify-center gap-6 text-emerald-300 font-medium underline">
+        {blogContent.links.map((link, index) => (
+          <a key={index} href={link.href}>
+            {link.label}
+          </a>
+        ))}
+      </nav>
+    </section>
   );
 }

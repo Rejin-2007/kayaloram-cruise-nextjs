@@ -1,145 +1,175 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { HiPhone } from "react-icons/hi";
 import { SiGmail } from "react-icons/si";
 import { SlLocationPin } from "react-icons/sl";
 
-const socialButtonClasses =
-  "transition-all duration-200 hover:scale-110 bg-gradient-to-br from-lime-200/30 to-lime-400/30 border-2 border-lime-300 rounded-full p-3 shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-300";
+/* ---------- Footer Nav Items ---------- */
+const footerNav = [
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Services", path: "/services" },
+  { name: "Blog", path: "/blog" },
+  { name: "Reservation", path: "/reservation" },
+  { name: "Contact", path: "/contact" },
+];
 
 export default function Footer() {
   return (
     <footer
-      id="contact"
-      className="w-full px-4 py-12 bg-emerald-950 border-t border-green-400/10 shadow-inner"
-      aria-label="Poovar Boating and Poovar Island Boating Footer"
+      className="bg-emerald-950 border-t border-emerald-400/10 text-lime-100"
+      aria-label="Poovar Boating Footer"
     >
-      <motion.div
-        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        {/* Logo */}
-        <div className="flex flex-col items-center md:items-start gap-3">
+      {/* MAP SECTION */}
+      <div className="w-full">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3099.6679861468047!2d77.08617065259043!3d8.311056629233937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05a99c11a043a7%3A0x8984b4fe9e723ef!2skayaloram%20resort!5e1!3m2!1sen!2sin!4v1750411038045!5m2!1sen!2sin"
+          width="100%"
+          height="420"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Kayaloram Resort Google Maps Location"
+          className="border-b border-emerald-400/10"
+        />
+      </div>
+
+      {/* MAIN FOOTER */}
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
+        {/* Brand */}
+        <div className="space-y-4">
           <Image
             src="/logo.webp"
-            alt="Kayaloram Resort – Poovar Boating and Poovar Island Boating"
-            width={220}
-            height={80}
+            alt="Kayaloram Resort – Poovar Boating"
+            width={200}
+            height={70}
             priority
-            className="drop-shadow"
           />
-          <p className="text-sm text-lime-200 max-w-xs text-center md:text-left">
+          <p className="text-sm text-lime-200 leading-relaxed">
             Trusted Poovar boating & Poovar island boating experiences since 1999.
-            Explore Kerala backwaters, mangroves, and golden beach tours.
+            Explore Kerala backwaters, mangroves, and golden beach cruises.
           </p>
         </div>
 
-        {/* Contact Info */}
-        <div className="flex flex-col gap-6 items-center md:items-start">
-          <div>
-            <div className="flex items-center gap-2 font-semibold text-lime-300">
-              <SiGmail />
-              <span>Email</span>
-            </div>
+        {/* Footer Navigation */}
+        <nav aria-label="Footer Navigation">
+          <h3 className="text-lime-300 font-semibold mb-4">
+            Quick Links
+          </h3>
+          <ul className="space-y-3 text-sm">
+            {footerNav.map((item) => (
+              <li key={item.name}>
+                <Link
+                  href={item.path}
+                  className="hover:text-lime-300 transition-colors"
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Contact */}
+        <div className="space-y-4 text-sm">
+          <h3 className="text-lime-300 font-semibold">Contact</h3>
+
+          <div className="flex items-start gap-3">
+            <SiGmail className="mt-1 text-lime-300" />
             <a
               href="mailto:rajeshkayaloram@gmail.com"
-              className="text-lime-100 underline hover:text-lime-200 break-all"
-              aria-label="Email Kayaloram Resort for Poovar boating enquiries"
-              title="Email Poovar Boating"
+              className="hover:underline"
             >
               rajeshkayaloram@gmail.com
             </a>
           </div>
 
-          <div>
-            <div className="flex items-center gap-2 font-semibold text-lime-300">
-              <SlLocationPin />
-              <span>Location</span>
+          <div className="flex items-start gap-3">
+            <HiPhone className="mt-1 text-lime-300" />
+            <div className="space-y-1">
+              <a href="tel:+918139031924" className="block hover:underline">
+                +91 81390 31924
+              </a>
+              <a href="tel:+918075413797" className="block hover:underline">
+                +91 80754 13797
+              </a>
             </div>
-            <address className="not-italic text-lime-100 text-sm leading-relaxed">
+          </div>
+        </div>
+
+        {/* Location */}
+        <div className="space-y-4 text-sm">
+          <h3 className="text-lime-300 font-semibold">Location</h3>
+          <div className="flex items-start gap-3">
+            <SlLocationPin className="mt-1 text-lime-300" />
+            <address className="not-italic leading-relaxed">
               Kayaloram Resort <br />
               Club Mahindra Resort Road <br />
               Poovar, Kerala, India
             </address>
           </div>
         </div>
+      </div>
 
-        {/* Phone */}
-        <div className="flex flex-col gap-6 items-center md:items-start">
-          <div>
-            <div className="flex items-center gap-2 font-semibold text-lime-300">
-              <HiPhone />
-              <span>Phone</span>
-            </div>
-            <div className="text-lime-100 text-sm space-y-2">
-              <a
-                href="tel:+918139031924"
-                className="underline block"
-                aria-label="Call Poovar Boating at 8139031924"
-                title="Call Poovar Boating"
+      {/* BOTTOM BAR */}
+      <div className="border-t border-emerald-400/10 py-8">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+          {/* Social */}
+          <div className="flex gap-6">
+            {[
+              {
+                Icon: FaInstagram,
+                href: "https://www.instagram.com/poovar.boating",
+                label: "Poovar Boating Instagram",
+              },
+              {
+                Icon: FaYoutube,
+                href: "https://www.youtube.com/@rajeshmathias6014",
+                label: "Poovar Boating YouTube",
+              },
+              {
+                Icon: FaFacebook,
+                href: "https://www.facebook.com/share/1YPM77byhM/",
+                label: "Poovar Boating Facebook",
+              },
+            ].map(({ Icon, href, label }) => (
+              <motion.a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                aria-label={label}
+                whileHover={{ scale: 1.15 }}
+                className="text-2xl text-lime-300 hover:text-lime-400 transition-colors"
               >
-                +91 81390 31924
-              </a>
+                <Icon />
+              </motion.a>
+            ))}
+          </div>
+
+          {/* Credit + Copyright */}
+          <div className="text-center text-xs text-lime-200/70 space-y-1">
+            <p>
+              Designed & Developed by{" "}
               <a
-                href="tel:+918075413797"
-                className="underline block"
-                aria-label="Call Poovar Boating at 8075413797"
-                title="Call Poovar Boating"
+                href="https://www.instagram.com/browess"
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="text-lime-300 hover:underline"
               >
-                +91 80754 13797
+                Browzess
               </a>
-            </div>
+            </p>
+            <p>
+              © {new Date().getFullYear()} Kayaloram Resort · Poovar Boating · All rights reserved
+            </p>
           </div>
         </div>
-      </motion.div>
-
-      {/* Social Media */}
-      <nav
-        className="flex justify-center gap-8 mt-12"
-        aria-label="Poovar Boating Social Media Links"
-      >
-        {[FaInstagram, FaYoutube, FaFacebook].map((Icon, i) => {
-          const links = [
-            "https://www.instagram.com/poovar.boating",
-            "https://www.youtube.com/@rajeshmathias6014",
-            "https://www.facebook.com/share/1YPM77byhM/",
-          ];
-          const labels = [
-            "Poovar Boating Instagram",
-            "Poovar Boating YouTube",
-            "Poovar Boating Facebook",
-          ];
-          const colors = ["text-lime-400", "text-red-400", "text-blue-500"];
-
-          return (
-            <motion.a
-              key={i}
-              href={links[i]}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              aria-label={labels[i]}
-              title={labels[i]}
-              className={socialButtonClasses}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-            >
-              <Icon className={`${colors[i]} text-2xl`} />
-            </motion.a>
-          );
-        })}
-      </nav>
-
-      {/* Copyright */}
-      <div className="text-center text-xs mt-10 text-lime-100/80">
-        © {new Date().getFullYear()} Kayaloram Resort · Poovar Boating · All rights reserved
       </div>
     </footer>
   );
