@@ -1,47 +1,83 @@
 import AboutInformation from "@/components/AboutInformation";
-import Enquiry from "@/components/Enquiry";
+import ReservationClient from "@/components/ReservationClient";
 import Reviews from "@/components/Reviews";
 import type { Metadata } from "next";
 
-/* ---------- About Page SEO Metadata ---------- */
 export const metadata: Metadata = {
-  title:
-    "About Kayaloram Resort | Poovar Boating & Poovar Island Boating",
+  title: "About Poovar Island Boating | Kayaloram Boat Tours",
   description:
-    "Know more about Kayaloram Resort and our trusted Poovar boating and Poovar island boating services. Explore Kerala backwater cruises, mangrove boating, golden beach sightseeing, safety standards, and booking support.",
-  keywords: [
-    "about kayaloram resort",
-    "poovar boating service",
-    "poovar island boating",
-    "poovar backwaters",
-    "poovar sightseeing",
-    "poovar boat service",
-    "poovar back water cruise",
-    "poovar mangrove boating",
-  ],
+    "Learn about Poovar Island Boating by Kayaloram. Trusted boat tour agency offering backwater cruises, mangrove boating, sunset rides and island sightseeing in Poovar, Kerala.",
   alternates: {
-    canonical: "https://www.poovarislandboating.com/about",
+    canonical: "https://poovarislandboating.com/about",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
-/* ---------- About Page ---------- */
 export default function AboutPage() {
   return (
-    <main className="w-full overflow-hidden">
-      {/* ABOUT INFORMATION */}
-      <section aria-label="About Kayaloram Resort and Poovar boating service">
-        <AboutInformation />
-      </section>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "@id": "https://poovarislandboating.com/about#aboutpage",
+            "url": "https://poovarislandboating.com/about",
+            "name": "About Poovar Island Boating",
+            "isPartOf": {
+              "@type": "WebSite",
+              "@id": "https://poovarislandboating.com/#website"
+            },
+            "about": {
+              "@type": "LocalBusiness",
+              "@id": "https://poovarislandboating.com/#localbusiness",
+              "name": "Poovar Island Boating"
+            }
+          }),
+        }}
+      />
 
-      {/* CUSTOMER REVIEWS */}
-      <section aria-label="Customer reviews for Poovar boating service">
-        <Reviews />
-      </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://poovarislandboating.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "About",
+                "item": "https://poovarislandboating.com/about"
+              }
+            ]
+          }),
+        }}
+      />
 
-      {/* ENQUIRY / CTA */}
-      <section aria-label="Poovar boating enquiry and contact">
-        <Enquiry />
-      </section>
-    </main>
+      <main className="w-full overflow-hidden">
+        <section aria-label="About Poovar Island Boating">
+          <AboutInformation />
+        </section>
+
+        <section aria-label="Poovar boating customer reviews">
+          <Reviews />
+        </section>
+
+        <section aria-label="Poovar boating enquiry and contact">
+          <ReservationClient />
+        </section>
+      </main>
+    </>
   );
 }

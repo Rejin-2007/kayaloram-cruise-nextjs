@@ -14,58 +14,43 @@ const inter = Inter({
   display: "swap",
 });
 
-/* ---------- Global SEO Metadata ---------- */
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.poovarislandboating.com"),
-
+  metadataBase: new URL("https://poovarislandboating.com"),
   title: {
-    default: "Poovar Boating | Island & Backwater Cruise in Poovar",
-    template: "%s | Poovar Boating",
+    default: "Poovar Island Boating | Boat Tour & Backwater Cruise",
+    template: "%s | Poovar Island Boating",
   },
-
   description:
-    "Enjoy Poovar boating, island sightseeing, mangrove forest cruise and Kerala backwater experiences with Kayaloram Cruise.",
-
-  keywords: [
-    "poovar boating",
-    "poovar island boating",
-    "poovar backwaters",
-    "poovar boat service",
-    "poovar boating price",
-  ],
-
+    "Official Poovar Island Boating website. Book boat tours, backwater cruises, sunset rides and island sightseeing in Poovar, Kerala.",
   alternates: {
-    canonical: "https://www.poovarislandboating.com",
+    canonical: "https://poovarislandboating.com/",
   },
-
-  icons: {
-    icon: "/favicon.webp",
-  },
-
   openGraph: {
-    title: "Poovar Boating & Island Backwater Cruise",
+    title: "Poovar Island Boating | Boat Tour & Backwater Cruise",
     description:
-      "Book Poovar boating with Kayaloram Cruise. Explore mangroves, golden beach and scenic Kerala backwaters.",
-    url: "https://www.poovarislandboating.com",
-    siteName: "Kayaloram Cruise Poovar",
+      "Book Poovar Island boating, mangrove forest cruise, golden beach visit and sunset boat rides in Kerala.",
+    url: "https://poovarislandboating.com/",
+    siteName: "Poovar Island Boating",
     images: [
       {
-        url: "/firstImage.webp",
+        url: "https://poovarislandboating.com/firstImage.webp",
         width: 1200,
         height: 630,
-        alt: "Poovar boating and island backwater cruise",
+        alt: "Poovar Island boating and backwater cruise",
       },
     ],
     locale: "en_IN",
     type: "website",
   },
-
   twitter: {
     card: "summary_large_image",
-    title: "Poovar Boating | Island & Backwater Cruise",
+    title: "Poovar Island Boating | Backwater Cruise",
     description:
-      "Explore Poovar boating, island sightseeing and Kerala backwater cruises with Kayaloram.",
-    images: ["/firstImage.webp"],
+      "Experience Poovar Island boating, backwaters and sunset cruises. Book online.",
+    images: ["https://poovarislandboating.com/firstImage.webp"],
+  },
+  icons: {
+    icon: "/favicon.webp",
   },
 };
 
@@ -77,37 +62,59 @@ export default function RootLayout({
   const navItems = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
+    { name: "Services", path: "/service" },
     { name: "Gallery", path: "/gallery" },
-    { name: "Service", path: "/service" },
     { name: "Blog", path: "/blog" },
-    { name: "Reservation", path: "/reservation" },
+    { name: "Booking", path: "/reservation" },
   ];
 
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "@id": "https://poovarislandboating.com/#localbusiness",
+              "name": "Poovar Island Boating",
+              "url": "https://poovarislandboating.com/",
+              "telephone": "+91-XXXXXXXXXX",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Poovar Island",
+                "addressLocality": "Poovar",
+                "addressRegion": "Kerala",
+                "postalCode": "695525",
+                "addressCountry": "IN"
+              },
+              "openingHours": "Mo-Su 06:00-18:30",
+              "image": [
+                "https://poovarislandboating.com/firstImage.webp"
+              ],
+              "priceRange": "₹₹",
+              "sameAs": []
+            }),
+          }}
+        />
+      </head>
       <body className="min-h-screen bg-emerald-950 font-sans text-white">
         <Navbar navItems={navItems} />
-
-        {/* Main Content – SEO Landmark */}
-        <main id="page-content" className="relative">
-          {children}
-
-          <Toaster
-            position="top-center"
-            toastOptions={{
-              style: {
-                background: "#020617",
-                color: "#E6FFFA",
-                border: "1px solid #2DD4BF",
-              },
-            }}
-          />
-
-          <FloatingContactButtons />
-          <TawkToChat />
-        </main>
-
+        <main id="page-content">{children}</main>
+        <FloatingContactButtons />
+        <TawkToChat />
         <Footer />
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            style: {
+              background: "#020617",
+              color: "#E6FFFA",
+              border: "1px solid #2DD4BF",
+            },
+          }}
+        />
       </body>
     </html>
   );

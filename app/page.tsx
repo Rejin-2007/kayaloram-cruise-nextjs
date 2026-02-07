@@ -1,75 +1,106 @@
 import AboutInformation from "@/components/AboutInformation";
 import Reviews from "@/components/Reviews";
-import Enquiry from "@/components/Enquiry";
 import HomeEntry from "@/components/HomeEntry";
 import ExplorationViews from "@/components/ExplorationViews";
 import GlassCardGrid from "@/components/GlassCardGrid";
 import FAQ from "@/components/FAQ";
 import type { Metadata } from "next";
+import ReservationClient from "@/components/ReservationClient";
 
-/* ---------- Home SEO Metadata ---------- */
 export const metadata: Metadata = {
-  title:
-    "Poovar Boating & Poovar Island Boating | Price, Timings & Booking",
+  title: "Poovar Boating & Poovar Island Boating | Price, Timings & Booking",
   description:
-    "Poovar boating and Poovar island boating at Kayaloram Resort, Kerala. Check Poovar boating price, timings, packages, mangrove boating, backwater cruise, sightseeing and book your boat ride easily.",
-  keywords: [
-    "poovar boating",
-    "poovar island boating",
-    "poovar boating price",
-    "poovar boating timings",
-    "poovar backwaters",
-    "poovar sightseeing",
-    "poovar boat ride",
-    "poovar mangrove boating",
-    "poovar boating charges",
-    "poovar boating ticket price",
-    "poovar back water cruise",
-    "activities in poovar",
-  ],
+    "Poovar boating and Poovar island boating in Kerala. View boating prices, timings, packages, mangrove cruise, sunset ride and book your boat tour online.",
   alternates: {
-    canonical: "https://www.poovarislandboating.com",
+    canonical: "https://poovarislandboating.com/",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
-/* ---------- Home Page ---------- */
 export default function HomePage() {
   return (
-    <main className="relative w-full overflow-hidden">
-      {/* HERO / LCP SECTION */}
-      <section aria-label="Poovar boating and Poovar island boating booking">
-        <HomeEntry />
-      </section>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "@id": "https://poovarislandboating.com/#homepage",
+            "url": "https://poovarislandboating.com/",
+            "name": "Poovar Island Boating",
+            "isPartOf": {
+              "@type": "WebSite",
+              "@id": "https://poovarislandboating.com/#website"
+            },
+            "primaryImageOfPage": {
+              "@type": "ImageObject",
+              "url": "https://poovarislandboating.com/firstImage.webp"
+            }
+          }),
+        }}
+      />
 
-      {/* ABOUT */}
-      <section aria-label="About Poovar boating service">
-        <AboutInformation />
-      </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "@id": "https://poovarislandboating.com/#boattour",
+            "name": "Poovar Boat Tour & Backwater Cruise",
+            "serviceType": "Boat Tour Agency",
+            "provider": {
+              "@type": "LocalBusiness",
+              "@id": "https://poovarislandboating.com/#localbusiness"
+            },
+            "areaServed": {
+              "@type": "Place",
+              "name": "Poovar, Kerala"
+            },
+            "availableChannel": {
+              "@type": "ServiceChannel",
+              "serviceLocation": {
+                "@type": "Place",
+                "name": "Poovar Island Jetty"
+              }
+            }
+          }),
+        }}
+      />
 
-      {/* EXPERIENCE / VIEWS */}
-      <section aria-label="Poovar sightseeing and backwater views">
-        <ExplorationViews />
-      </section>
+      <main className="relative w-full overflow-hidden">
+        <section aria-label="Poovar boating booking">
+          <HomeEntry />
+        </section>
 
-      {/* PACKAGES */}
-      <section aria-label="Poovar boating packages and prices">
-        <GlassCardGrid />
-      </section>
+        <section aria-label="About Poovar island boating">
+          <AboutInformation />
+        </section>
 
-      {/* FAQ */}
-      <section aria-label="Poovar boating timings, price and FAQs">
-        <FAQ />
-      </section>
+        <section aria-label="Poovar backwater sightseeing views">
+          <ExplorationViews />
+        </section>
 
-      {/* REVIEWS */}
-      <section aria-label="Poovar boating customer reviews">
-        <Reviews />
-      </section>
+        <section aria-label="Poovar boating packages and pricing">
+          <GlassCardGrid />
+        </section>
 
-      {/* ENQUIRY / CTA */}
-      <section aria-label="Poovar boating enquiry and booking">
-        <Enquiry />
-      </section>
-    </main>
+        <section aria-label="Poovar boating frequently asked questions">
+          <FAQ />
+        </section>
+
+        <section aria-label="Poovar boating customer reviews">
+          <Reviews />
+        </section>
+
+        <section aria-label="Poovar boating reservation form">
+          <ReservationClient />
+        </section>
+      </main>
+    </>
   );
 }

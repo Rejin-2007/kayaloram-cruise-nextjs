@@ -1,39 +1,72 @@
 import Blog from "@/components/Blog";
 import type { Metadata } from "next";
 
-/* ---------- Blog Page SEO Metadata ---------- */
 export const metadata: Metadata = {
-  title:
-    "Poovar Boating Blog | Price, Timings, Tips & Travel Guides",
+  title: "Poovar Boating Blog | Prices, Timings & Travel Guides",
   description:
-    "Read the Poovar Boating Blog for detailed guides on Poovar boating price, timings, sightseeing, backwater cruises, mangrove boating, island activities, and travel tips.",
-  keywords: [
-    "poovar boating blog",
-    "poovar boating price",
-    "poovar boating timings",
-    "poovar sightseeing",
-    "poovar island boating",
-    "poovar backwaters",
-    "poovar activities",
-    "poovar back water cruise",
-    "kerala backwater boating",
-    "poovar travel guide",
-  ],
+    "Official Poovar Boating Blog with guides on boating prices, timings, backwater cruises, mangrove boating, island sightseeing and Kerala travel tips.",
   alternates: {
-    canonical: "https://www.poovarislandboating.com/blog",
+    canonical: "https://poovarislandboating.com/blog",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
-/* ---------- Blog Page ---------- */
 export default function BlogPage() {
   return (
-    <main
-      className="w-full min-h-screen"
-      aria-label="Poovar boating blog, travel guides and boating information"
-    >
-      <section aria-label="Poovar boating articles and guides">
-        <Blog />
-      </section>
-    </main>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "@id": "https://poovarislandboating.com/blog#blog",
+            "url": "https://poovarislandboating.com/blog",
+            "name": "Poovar Boating Blog",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Poovar Island Boating",
+              "url": "https://poovarislandboating.com/"
+            }
+          }),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://poovarislandboating.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": "https://poovarislandboating.com/blog"
+              }
+            ]
+          }),
+        }}
+      />
+
+      <main
+        className="w-full min-h-screen"
+        aria-label="Poovar boating blog articles and travel guides"
+      >
+        <section aria-label="Poovar boating blog posts">
+          <Blog />
+        </section>
+      </main>
+    </>
   );
 }

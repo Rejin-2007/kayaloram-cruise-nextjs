@@ -2,125 +2,124 @@
 
 import { useState } from "react";
 
-/* ---------- FAQ DATA ---------- */
 const faqData = [
   {
     question: "What time does Poovar boating start?",
     answer:
-      "Poovar boating services and Poovar island boating begin at 6:00 AM and continue until evening at 5:00 PM. Plan your Poovar boating trip any time within these hours for a comfortable experience.",
+      "Poovar boating and Poovar island boating services operate daily from 6:00 AM to 5:00 PM, allowing visitors to choose the best time for backwater cruises and sightseeing.",
   },
   {
     question: "Which is the best time for Poovar island boating?",
     answer:
-      "The best time for Poovar island boating is early morning. Pleasant weather, calm waters, and beautiful sunrise views make morning Poovar boating the most preferred choice.",
+      "Early morning is the best time for Poovar island boating due to calm waters, pleasant climate, and scenic sunrise views across Kerala backwaters.",
   },
   {
-    question: "Are boats shared or exclusive for Poovar boating?",
+    question: "Are boats shared or private for Poovar boating?",
     answer:
-      "Every Poovar boating booking provides an exclusive boat for your group. You can enjoy private Poovar island boating without sharing your boat with others.",
+      "All Poovar boating bookings include private boats exclusively for your group, ensuring a comfortable and personal island boating experience.",
   },
   {
-    question: "Are Poovar boating services government approved?",
+    question: "Is Poovar boating government approved?",
     answer:
-      "Yes, Poovar boating and Poovar island boating services are officially approved by the Kerala government, ensuring safety, legality, and reliability.",
+      "Yes. Poovar boating and Poovar island boating services are Kerala government approved and fully authorized for tourist operations.",
   },
   {
-    question: "Are boats certified and insured for Poovar island boating?",
+    question: "Are Poovar boating boats certified and insured?",
     answer:
-      "Absolutely. All Poovar boating boats are certified, insured, and regularly fitness-checked to ensure a safe Poovar island boating experience.",
+      "All boats used for Poovar boating are certified, insured, and regularly inspected to meet safety and operational standards.",
   },
   {
-    question: "Do Poovar boating boats have rooftops?",
+    question: "Do Poovar boating boats have rooftop seating?",
     answer:
-      "Yes, Poovar boating trips use comfortable rooftop boats that provide shade and offer panoramic views of Kerala backwaters.",
+      "Yes. Poovar boating uses rooftop motor boats that provide shade, comfort, and panoramic views of the backwaters.",
   },
   {
-    question: "What type of boat is used for Poovar island boating?",
+    question: "What type of boats are used for Poovar island boating?",
     answer:
-      "Modern fiber motor boats are used for Poovar boating and Poovar island boating, designed for smooth navigation and equipped with all safety measures.",
+      "Modern fiber motor boats with safety equipment are used for Poovar island boating and Kerala backwater cruises.",
   },
 ];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
     <section
+      id="poovar-boating-faq"
       className="mx-auto mt-20 max-w-3xl px-4"
-      aria-labelledby="faq-heading"
+      aria-labelledby="faq-title"
+      itemScope
+      itemType="https://schema.org/FAQPage"
     >
-      {/* ---------- FAQ SCHEMA (SEO) ---------- */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: faqData.map((item) => ({
+            mainEntity: faqData.map((f) => ({
               "@type": "Question",
-              name: item.question,
+              name: f.question,
               acceptedAnswer: {
                 "@type": "Answer",
-                text: item.answer,
+                text: f.answer,
               },
             })),
           }),
         }}
       />
 
-      <div className="rounded-3xl border border-emerald-300/30 bg-emerald-400/20 p-6 shadow-xl backdrop-blur-md">
-        {/* H2 for SEO */}
-        <h2
-          id="faq-heading"
-          className="mb-10 text-center text-2xl font-extrabold text-emerald-300 md:text-3xl"
-        >
-          Frequently Asked Questions – Poovar Boating & Poovar Island Tours
-        </h2>
+      <h2
+        id="faq-title"
+        className="mb-10 text-center text-2xl font-extrabold text-emerald-300 md:text-3xl"
+      >
+        Poovar Boating – Frequently Asked Questions
+      </h2>
 
-        <div className="flex flex-col gap-4">
-          {faqData.map((item, index) => {
-            const isOpen = openIndex === index;
+      <div className="space-y-4">
+        {faqData.map((item, i) => (
+          <article
+            key={i}
+            className="rounded-2xl border border-emerald-300/40 bg-white/10"
+            itemScope
+            itemType="https://schema.org/Question"
+            itemProp="mainEntity"
+          >
+            <button
+              className="flex w-full items-center justify-between px-5 py-4 text-left font-medium text-emerald-300"
+              onClick={() => setOpen(open === i ? null : i)}
+              aria-expanded={open === i}
+            >
+              <span itemProp="name">{item.question}</span>
+              <span className="text-2xl font-bold" aria-hidden>
+                {open === i ? "−" : "+"}
+              </span>
+            </button>
 
-            return (
-              <article
-                key={index}
-                className={`rounded-2xl border border-emerald-300 bg-white/10 transition ${
-                  isOpen ? "ring-2 ring-emerald-300" : ""
-                }`}
+            {open === i && (
+              <div
+                className="px-5 pb-4"
+                itemScope
+                itemType="https://schema.org/Answer"
+                itemProp="acceptedAnswer"
               >
-                <button
-                  className="flex w-full items-center justify-between rounded-2xl px-5 py-4 text-left font-medium text-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
-                  aria-expanded={isOpen}
-                  aria-controls={`faq-panel-${index}`}
+                <p
+                  className="text-base leading-relaxed text-emerald-300"
+                  itemProp="text"
                 >
-                  <span>{item.question}</span>
-                  <span
-                    className="ml-3 select-none text-2xl font-bold text-emerald-300"
-                    aria-hidden
-                  >
-                    {isOpen ? "−" : "+"}
-                  </span>
-                </button>
-
-                <div
-                  id={`faq-panel-${index}`}
-                  className={`overflow-hidden px-5 transition-[max-height,opacity] duration-500 ease-in-out ${
-                    isOpen
-                      ? "max-h-100 pb-4 opacity-100"
-                      : "max-h-0 opacity-0"
-                  }`}
-                  aria-hidden={!isOpen}
-                >
-                  <p className="text-base leading-relaxed text-emerald-300">
-                    {item.answer}
-                  </p>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+                  {item.answer}
+                </p>
+              </div>
+            )}
+          </article>
+        ))}
       </div>
+
+      <nav className="sr-only">
+        <a href="/services">Poovar boating services</a>
+        <a href="/reservation">Book Poovar boating</a>
+        <a href="/contact">Poovar boating contact</a>
+      </nav>
     </section>
   );
 }
