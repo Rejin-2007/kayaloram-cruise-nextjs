@@ -48,9 +48,8 @@ export default function FAQ() {
       id="poovar-boating-faq"
       className="mx-auto mt-20 max-w-3xl px-4"
       aria-labelledby="faq-title"
-      itemScope
-      itemType="https://schema.org/FAQPage"
     >
+      {/* ✅ JSON-LD ONLY */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -81,32 +80,21 @@ export default function FAQ() {
           <article
             key={i}
             className="rounded-2xl border border-emerald-300/40 bg-white/10"
-            itemScope
-            itemType="https://schema.org/Question"
-            itemProp="mainEntity"
           >
             <button
               className="flex w-full items-center justify-between px-5 py-4 text-left font-medium text-emerald-300"
               onClick={() => setOpen(open === i ? null : i)}
               aria-expanded={open === i}
             >
-              <span itemProp="name">{item.question}</span>
+              <span>{item.question}</span>
               <span className="text-2xl font-bold" aria-hidden>
                 {open === i ? "−" : "+"}
               </span>
             </button>
 
             {open === i && (
-              <div
-                className="px-5 pb-4"
-                itemScope
-                itemType="https://schema.org/Answer"
-                itemProp="acceptedAnswer"
-              >
-                <p
-                  className="text-base leading-relaxed text-emerald-300"
-                  itemProp="text"
-                >
+              <div className="px-5 pb-4">
+                <p className="text-base leading-relaxed text-emerald-300">
                   {item.answer}
                 </p>
               </div>
@@ -114,12 +102,6 @@ export default function FAQ() {
           </article>
         ))}
       </div>
-
-      <nav className="sr-only">
-        <a href="/services">Poovar boating services</a>
-        <a href="/reservation">Book Poovar boating</a>
-        <a href="/contact">Poovar boating contact</a>
-      </nav>
     </section>
   );
 }
